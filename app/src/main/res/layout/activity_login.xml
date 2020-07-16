@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        android:gravity="top"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/Logintxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColorHint="#9e9191"
+            android:hint="login"
+            android:textColor="#1f90cc"
+            android:layout_marginTop="50sp"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/Passwordtxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColorHint="#9e9191"
+            android:textColor="#1f90cc"
+            android:hint="hasło"
+            android:inputType="textPassword" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            >
+            <TextView
+                android:id="@+id/poka"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColorHint="#1f90cc"
+                android:hint="Pokaż hasło" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/Loginbtn"
+            android:layout_width="100pt"
+            android:layout_height="25pt"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/zaloguj" />
+
+        <TextView
+            android:id="@+id/errortxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:width="20dp"
+            android:gravity="center"
+            android:text=""
+            android:visibility="visible"
+            android:textColor="#ff0000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/Versionerror"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
