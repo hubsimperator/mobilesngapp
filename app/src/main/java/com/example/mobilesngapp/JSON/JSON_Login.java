@@ -74,7 +74,7 @@ public class JSON_Login {
     protected void onPostExecute(String result) {
             if(result.contains("true"))
             {
-               // con.startActivity(new Intent(con, SplashScreen.class));
+                //con.startActivity(new Intent(con, SplashScreen.class));
 
             }
             else
