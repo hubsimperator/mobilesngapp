@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_span="@android:integer/config_shortAnimTime">
+    android:layout_span="@android:integer/config_shortAnimTime"
+    android:background="#756F6F">
 
     <EditText
         android:id="@+id/dateText"
