@@ -1,7 +1,9 @@
 package com.example.mobilesngapp.JSON;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.mobilesngapp.Class.Job;
 
@@ -68,6 +70,7 @@ public class JSON_GetJobList {
         return result;
     }
     private class HttpAsyncTask2 extends AsyncTask<String, Void, ArrayList<Job>> {
+
         @Override
         protected ArrayList<Job> doInBackground(String... urls) {
             String post= POST(urls[0]);
@@ -91,9 +94,13 @@ public class JSON_GetJobList {
     @Override
     protected void onPostExecute(ArrayList<Job> result) {
 
-            // zrobi Rafał
-
-    }
+            for (int i = 0; i < result.size(); i++) {
+                Log.d("Test",result.get(i).WorkName);
+            }
+            //przejsc do nowego okna i w liscie wypisac WorkName
+        Intent intent = new Intent();
+        startActivityForResult(intent, 0);
+        }
     }
 
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
