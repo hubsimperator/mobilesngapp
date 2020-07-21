@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/Logintxt"
+            android:id="@+id/login_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -27,7 +27,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/Passwordtxt"
+            android:id="@+id/password_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -41,7 +41,7 @@
             android:gravity="right"
             >
             <TextView
-                android:id="@+id/poka"
+                android:id="@+id/showPassword_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -50,7 +50,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/Loginbtn"
+            android:id="@+id/login_bt"
             android:layout_width="100pt"
             android:layout_height="25pt"
             android:layout_gravity="center"

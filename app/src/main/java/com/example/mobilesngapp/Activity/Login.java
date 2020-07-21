@@ -1,6 +1,5 @@
 package com.example.mobilesngapp.Activity;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -8,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -32,9 +30,9 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.example.mobilesngapp.JSON.JSON_Login;
+import com.example.mobilesngapp.Other.Permission;
 import com.example.mobilesngapp.Other.getNetworkType;
 import com.example.mobilesngapp.R;
 
@@ -87,12 +85,13 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        if (!checkPermissions()) {
-            setPermissions();
+        Permission permission=new Permission();
+        if (!permission.checkPermissions(Login.this)) {
+            permission.setPermissions((Activity) this);
         }
 //zmiana huberta
 
-        Password = (EditText) findViewById(R.id.Passwordtxt);
+        Password = (EditText) findViewById(R.id.password_et);
 
 
 //przypal na mnie
@@ -101,9 +100,6 @@ public class Login extends AppCompatActivity {
             final TextView error = (TextView) findViewById(R.id.errortxt);
             final Context context = this;
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            String tit = null;
-            String bod = null;
-
 
             if (isConnected()) {
                 error.setTextColor(0xFF00CC00);
@@ -116,34 +112,34 @@ public class Login extends AppCompatActivity {
             }
 
 
-            final TextView poka = (TextView) findViewById(R.id.poka);
+            final TextView poka = (TextView) findViewById(R.id.showPassword_tv);
             poka.setVisibility(View.INVISIBLE);
 
-            ((EditText) findViewById(R.id.Passwordtxt)).addTextChangedListener(new TextWatcher() {
+            ((EditText) findViewById(R.id.password_et)).addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    if (((EditText) findViewById(R.id.Passwordtxt)).length() == 0) {
+                    if (((EditText) findViewById(R.id.password_et)).length() == 0) {
                         poka.setVisibility(View.VISIBLE);
                     }
                 }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if (((EditText) findViewById(R.id.Passwordtxt)).getText().length() == 0) {
+                    if (((EditText) findViewById(R.id.password_et)).getText().length() == 0) {
                         poka.setVisibility(View.VISIBLE);
                     }
                 }
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if (((EditText) findViewById(R.id.Passwordtxt)).getText().length() == 0) {
+                    if (((EditText) findViewById(R.id.password_et)).getText().length() == 0) {
                         poka.setVisibility(View.VISIBLE);
                     }
                 }
             });
             poka.setOnTouchListener(show_text);
 
-            ImageView zaloguj = (ImageView) findViewById(R.id.Loginbtn);
+            ImageView zaloguj = (ImageView) findViewById(R.id.login_bt);
 
 
             zaloguj.setOnClickListener(new View.OnClickListener() {
@@ -153,8 +149,8 @@ public class Login extends AppCompatActivity {
                     final ProgressDialog pg = new ProgressDialog(context);
                     pg.setMessage("Wczytywanie...");
                     pg.show();
-                    final String Logi = ((EditText) findViewById(R.id.Logintxt)).getText().toString();
-                    final String Haslo = ((EditText) findViewById(R.id.Passwordtxt)).getText().toString();
+                    final String Logi = ((EditText) findViewById(R.id.login_et)).getText().toString();
+                    final String Haslo = ((EditText) findViewById(R.id.password_et)).getText().toString();
 
 
                     TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -188,8 +184,7 @@ public class Login extends AppCompatActivity {
                     pg.hide();
                 } else {
 
-                    JSON_Login json_login=new JSON_Login();
-                    json_login.StartUpdate(Logi,Haslo,IMEI,telephoneNumber,Login.this,pg,error);
+                    JSON_Login json_login=new JSON_Login(Login.this,Logi,Haslo,IMEI,telephoneNumber,error,pg);
 
                 }
             }
@@ -199,59 +194,6 @@ public class Login extends AppCompatActivity {
         }
 
 }
-
-    private boolean checkPermissions() {
-
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-              if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.SET_ALARM) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private void setPermissions() {
-        ActivityCompat.requestPermissions((Activity) this, new String[]{
-                Manifest.permission.INTERNET , Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.VIBRATE ,Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.SET_ALARM,Manifest.permission.READ_PHONE_STATE}, 1);
-    }
-
     public void w8(final TextView error){
         try {
             error.setTextColor(0xFFFF0000);
@@ -315,7 +257,7 @@ public class Login extends AppCompatActivity {
     private View.OnTouchListener show_text = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            if (v.getId() == R.id.poka) {
+            if (v.getId() == R.id.showPassword_tv) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     Password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
