@@ -1,6 +1,9 @@
 package com.example.mobilesngapp.Class;
 
-public class Job {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Job implements Parcelable {
     public Integer WorkPlanId;
     public String WorkStart;
     public String Duration;
@@ -32,6 +35,43 @@ public class Job {
         Status = status;
         StatusId = statusId;
     }
+
+    protected Job(Parcel in) {
+        if (in.readByte() == 0) {
+            WorkPlanId = null;
+        } else {
+            WorkPlanId = in.readInt();
+        }
+        WorkStart = in.readString();
+        Duration = in.readString();
+        WorkName = in.readString();
+        NBR = in.readString();
+        Desig = in.readString();
+        JobStart = in.readString();
+        JobEnd = in.readString();
+        JobMinStart = in.readString();
+        JobMaxStart = in.readString();
+        SNGUser = in.readString();
+        Dzial = in.readString();
+        Status = in.readString();
+        if (in.readByte() == 0) {
+            StatusId = null;
+        } else {
+            StatusId = in.readInt();
+        }
+    }
+
+    public static final Creator<Job> CREATOR = new Creator<Job>() {
+        @Override
+        public Job createFromParcel(Parcel in) {
+            return new Job(in);
+        }
+
+        @Override
+        public Job[] newArray(int size) {
+            return new Job[size];
+        }
+    };
 
     public Integer getWorkPlanId() {
         return WorkPlanId;
@@ -143,5 +183,38 @@ public class Job {
 
     public void setStatusId(Integer statusId) {
         StatusId = statusId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (WorkPlanId == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(WorkPlanId);
+        }
+        parcel.writeString(WorkStart);
+        parcel.writeString(Duration);
+        parcel.writeString(WorkName);
+        parcel.writeString(NBR);
+        parcel.writeString(Desig);
+        parcel.writeString(JobStart);
+        parcel.writeString(JobEnd);
+        parcel.writeString(JobMinStart);
+        parcel.writeString(JobMaxStart);
+        parcel.writeString(SNGUser);
+        parcel.writeString(Dzial);
+        parcel.writeString(Status);
+        if (StatusId == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(StatusId);
+        }
     }
 }

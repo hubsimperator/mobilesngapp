@@ -2,11 +2,14 @@ package com.example.mobilesngapp.JSON;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.TextView;
 
+import com.example.mobilesngapp.Activity.MainMenu;
 import com.example.mobilesngapp.Class.UserLogin;
+import com.example.mobilesngapp.WindowLayoutInflater.DeviceAuthentication;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -76,16 +79,18 @@ public class JSON_Login {
 
     @Override
     protected void onPostExecute(UserLogin result) {
+        result.Status = 1;
         if(result.Status==1){
             progressDialog.hide();
-
+            Intent intent = new Intent(con,  MainMenu.class);
+            con.startActivity(intent);
         }else if(result.Status==2){
             progressDialog.hide();
 
-            JSON_GetJobList json_getJobList=new JSON_GetJobList(con,User);
 
-           // DeviceAuthentication deviceAuthentication=new DeviceAuthentication();
-            //deviceAuthentication.show_DeviceAuthentication(con);
+
+            DeviceAuthentication deviceAuthentication=new DeviceAuthentication();
+            deviceAuthentication.show_DeviceAuthentication(con);
 
         }else if(result.Status==3){
             er.setTextColor(0xFFCC0000);

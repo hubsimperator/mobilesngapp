@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mobilesngapp.JSON.JSON_GetJobList;
 import com.example.mobilesngapp.R;
 
 import java.text.DateFormat;
@@ -73,8 +74,9 @@ public class MainMenu extends AppCompatActivity {
         planDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), PlanDay.class);
-                startActivityForResult(intent, 0);
+                //Intent intent = new Intent(view.getContext(), PlanDay.class);
+                //startActivityForResult(intent, 0);
+                JSON_GetJobList json_getJobList=new JSON_GetJobList(MainMenu.this,"admin");
             }
         });
         // Nowy ekran ZAPLANOWANE PRACE

@@ -3,8 +3,9 @@ package com.example.mobilesngapp.JSON;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.os.Bundle;
 
+import com.example.mobilesngapp.Activity.PlanDay;
 import com.example.mobilesngapp.Class.Job;
 
 import org.apache.http.HttpResponse;
@@ -93,14 +94,20 @@ public class JSON_GetJobList {
 
     @Override
     protected void onPostExecute(ArrayList<Job> result) {
+        /*Intent intent = new Intent(con, PlanDay.class);
+        Bundle bundle= new Bundle();
+        bundle.putParcelableArrayList("JobList", result);
+        intent.putExtras(bundle);
+        con.startActivity(intent);*/
 
-            for (int i = 0; i < result.size(); i++) {
-                Log.d("Test",result.get(i).WorkName);
-            }
-            //przejsc do nowego okna i w liscie wypisac WorkName
-        Intent intent = new Intent();
-        startActivityForResult(intent, 0);
-        }
+        Intent intent = new Intent(con, PlanDay.class);
+        Bundle bundle = new Bundle();
+
+        bundle.putParcelableArrayList("JobList", result);
+        intent.putExtras(bundle);
+        con.startActivity(intent);
+
+    }
     }
 
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
