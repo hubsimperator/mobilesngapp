@@ -3,21 +3,24 @@ package com.example.mobilesngapp.WindowLayoutInflater;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.mobilesngapp.JSON.JSON_SendPhoneToAuthentication;
 import com.example.mobilesngapp.R;
 
 public class DeviceAuthentication {
-    AlertDialog alertDialog;
+   public static AlertDialog alertDialog;
     View view;
 
-    public void show_DeviceAuthentication(Context con){
-
+    public void show_DeviceAuthentication(final Context con){
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(con)
                 .setNeutralButton("Powrót",null);
@@ -26,6 +29,32 @@ public class DeviceAuthentication {
         view = inflater.inflate(R.layout.authorization_phonenumber,null);
 
         final EditText edt = (EditText) view.findViewById(R.id.phonenumber_et);
+
+
+        Button sendPhonetoAuth =(Button) view.findViewById(R.id.sendPhoneNumberAuth_bt);
+        sendPhonetoAuth.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                TelephonyManager telephonyManager = (TelephonyManager) con.getSystemService(Context.TELEPHONY_SERVICE);
+                String IMEI ="";
+                try {
+                    IMEI = telephonyManager.getDeviceId();
+                }catch (NullPointerException ne){
+
+                }
+
+
+                String phoneNumber=edt.getText().toString();
+                JSON_SendPhoneToAuthentication json_sendPhoneToAuthentication=new JSON_SendPhoneToAuthentication(con,IMEI,phoneNumber);
+            }
+        });
+
+
+
+
+
 
         edt.setText("+48");
         Selection.setSelection(edt.getText(), edt.getText().length());
@@ -60,6 +89,12 @@ public class DeviceAuthentication {
         alertDialog =dialogBuilder.create();
         alertDialog.show();
     };
+
+
+    public void CloseWindow(){
+        alertDialog.dismiss();
+
+    }
 
     }
 

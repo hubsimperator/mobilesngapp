@@ -19,30 +19,30 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:text="Twoje urządzenie wymaga autoryzacji.  Proszę wpisać swój numer telefonu, na który zostanie wysłany SMS z kodem weryfikacyjnym" />
+        android:gravity="center"
+        android:text="W puste pole wprowadź kod, który otrzymałeś w SMS."
+        android:textSize="20sp" />
 
 
     <EditText
-        android:id="@+id/phonenumber_et"
+        android:id="@+id/codeAth_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_marginTop="20dp"
-        android:textSize="25dp"
-        android:hint="Wprowadź nr telefonu"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
+        android:ems="10"
         android:gravity="center"
-        android:inputType="phone" />
+        android:hint="Wprowadź kod"
+        android:inputType="phone"
+        android:textSize="25dp" />
 
 
     <Button
-        android:id="@+id/sendPhoneNumberAuth_bt"
+        android:id="@+id/sendCodeAuth_bt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Wyślij" />

@@ -32,6 +32,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mobilesngapp.JSON.JSON_Login;
+import com.example.mobilesngapp.Other.InfoAboutPhone;
 import com.example.mobilesngapp.Other.Permission;
 import com.example.mobilesngapp.Other.getNetworkType;
 import com.example.mobilesngapp.R;
@@ -152,16 +153,8 @@ public class Login extends AppCompatActivity {
                     final String Logi = ((EditText) findViewById(R.id.login_et)).getText().toString();
                     final String Haslo = ((EditText) findViewById(R.id.password_et)).getText().toString();
 
-
-                    TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-                    String IMEI ="";
-                    try {
-                        IMEI = telephonyManager.getDeviceId();
-                    }catch (NullPointerException ne){
-
-
-                    Log.d("a","aa");
-                    }
+                    InfoAboutPhone infoAboutPhone=new InfoAboutPhone();
+                    String IMEI =infoAboutPhone.getIMEI(Login.this);
 
                     if(IMEI==null){
                         IMEI = Settings.Secure.getString(
@@ -169,13 +162,7 @@ public class Login extends AppCompatActivity {
                                 Settings.Secure.ANDROID_ID);
                     }
 
-                    String telephoneNumber ="telefon";
-
-                    try {
-                        telephoneNumber = telephonyManager.getLine1Number();
-                    }catch (Exception e){
-                        Log.d("a","aa");
-                    }
+                    String telephoneNumber="";
 
                 if (Logi.equals("") || Haslo.equals("")) {
                     error.setTextColor(0xFFCC0000);
@@ -183,9 +170,7 @@ public class Login extends AppCompatActivity {
                     error.setText("Login i Hasło nie mogą być puste");
                     pg.hide();
                 } else {
-
                     JSON_Login json_login=new JSON_Login(Login.this,Logi,Haslo,IMEI,telephoneNumber,error,pg);
-
                 }
             }
         });
