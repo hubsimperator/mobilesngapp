@@ -1,6 +1,10 @@
 package com.example.mobilesngapp.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,21 +35,18 @@ public class PlanDay extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         ArrayList<Job> jobList  = extras.getParcelableArrayList("JobList");
 
-        //utworzenie loklanej tablicy i wprowadzenie danych z jsona do tabicy
+
+
         ArrayList<String> workNameJobList = new ArrayList<String>();
         for (int i = 0; i < jobList.size(); i++){
             String job = jobList.get(i).WorkName;
-            /*if (jobList.get(i).StatusId.equals(501)){
-                textView.setTextColor(Color.GRAY);
-                workNameJobList.add(job);
-            } else if (jobList.get(i).StatusId.equals(520)){
-                textView.setTextColor(Color.GREEN);
-                workNameJobList.add(job);
-            } else{
-                workNameJobList.add(job);
-            }*/
             workNameJobList.add(job);
         }
+        //Porównanie 2 tablic ze sobą. Jeżeli tablica status == zakonczona
+        // to sprawdzic index statusow i porownac z tablica workname,
+        // nastepnie dane miejse oznaczyc a finalnie zmienic kolor tla
+
+
 
         // Ustawienie adaptera
         ArrayAdapter<String> workNameJobAdapter =
@@ -56,5 +57,16 @@ public class PlanDay extends AppCompatActivity {
                 );
         workListView.setAdapter(workNameJobAdapter);
 
+        //Mozliwośc klikania list view
+
+        workListView.setOnItemClickListener((AdapterView.OnItemClickListener) this);
+
+    }
+
+    public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+        Log.i("ListView", "You clicked Item: " + id + " at position:" + position);
+        // Odpalenie nowego Activity przez Intenta
+        Intent intent = new Intent();
+        //intent.setClass(this, WorksMenu.class);
     }
 }
