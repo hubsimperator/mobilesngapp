@@ -2,9 +2,12 @@ package com.example.mobilesngapp.JSON;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.TextView;
+
+import com.example.mobilesngapp.Activity.MainMenu;
 import com.example.mobilesngapp.Class.UserLogin;
 import com.example.mobilesngapp.WindowLayoutInflater.DeviceAuthentication;
 
@@ -76,18 +79,19 @@ public class JSON_Login {
     @Override
     protected void onPostExecute(UserLogin result) {
             //result.Status=2;
+        //login poprawny -> przejdz do menu
         if(result.Status==1){
             progressDialog.hide();
+            con.startActivity(new Intent(con, MainMenu.class));
 
-        }else if(result.Status==2){
+        }//brak autoryzacji urzadzenia
+        else if(result.Status==2){
             progressDialog.hide();
-
-          //  JSON_GetJobList json_getJobList=new JSON_GetJobList(con,User);
-
            DeviceAuthentication deviceAuthentication=new DeviceAuthentication();
             deviceAuthentication.show_DeviceAuthentication(con);
 
-        }else if(result.Status==3){
+        }//bledny login/haslo
+        else if(result.Status==3){
             er.setTextColor(0xFFCC0000);
             er.setGravity(Gravity.CENTER);
             er.setText(result.PassHash);

@@ -89,7 +89,6 @@ public class JSON_GetJobList {
     @Override
     protected void onPostExecute(ArrayList<Job> result) {
 
-            // zrobi Rafał
 
     }
     }

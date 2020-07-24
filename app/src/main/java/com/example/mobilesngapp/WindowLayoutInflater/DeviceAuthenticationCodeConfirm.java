@@ -2,6 +2,7 @@ package com.example.mobilesngapp.WindowLayoutInflater;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.Selection;
@@ -11,18 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.mobilesngapp.Activity.Login;
 import com.example.mobilesngapp.JSON.JSON_SendCodeToConfirmAuthentication;
 import com.example.mobilesngapp.JSON.JSON_SendPhoneToAuthentication;
 import com.example.mobilesngapp.R;
 
 public class DeviceAuthenticationCodeConfirm {
-   public  AlertDialog alertDialog;
+   public static AlertDialog alertDialog;
     View view;
 
     public void show_DeviceAuthenticationCode(final Context con){
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(con)
-                .setNeutralButton("Powrót",null);
+                .setNeutralButton("Powrót",null)
+                .setCancelable(false);
 
         LayoutInflater inflater = (LayoutInflater)   con.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.authorization_confirmcode,null);
@@ -44,13 +47,17 @@ public class DeviceAuthenticationCodeConfirm {
 
                 }
 
+                if(IMEI==null){
+                    IMEI = Settings.Secure.getString(
+                            con.getContentResolver(),
+                            Settings.Secure.ANDROID_ID);
+                }
+
 
                 String codeAuth=edt.getText().toString();
                 JSON_SendCodeToConfirmAuthentication json_sendCodeToConfirmAuthentication=new JSON_SendCodeToConfirmAuthentication(con,IMEI,codeAuth);
-               // JSON_SendPhoneToAuthentication json_sendPhoneToAuthentication=new JSON_SendPhoneToAuthentication(con,IMEI,phoneNumber);
             }
         });
-
 
 
         dialogBuilder.setView(view);
@@ -59,7 +66,7 @@ public class DeviceAuthenticationCodeConfirm {
     };
 
     public void CloseWindow(){
-        alertDialog.show();
+        alertDialog.dismiss();
 
     }
 

@@ -3,6 +3,7 @@ package com.example.mobilesngapp.WindowLayoutInflater;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.Selection;
@@ -22,8 +23,11 @@ public class DeviceAuthentication {
 
     public void show_DeviceAuthentication(final Context con){
 
+
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(con)
-                .setNeutralButton("Powrót",null);
+                .setNeutralButton("Powrót",null)
+                .setCancelable(false);
+
 
         LayoutInflater inflater = (LayoutInflater)   con.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.authorization_phonenumber,null);
@@ -44,15 +48,16 @@ public class DeviceAuthentication {
                 }catch (NullPointerException ne){
 
                 }
-
+                if(IMEI==null){
+                    IMEI = Settings.Secure.getString(
+                            con.getContentResolver(),
+                            Settings.Secure.ANDROID_ID);
+                }
 
                 String phoneNumber=edt.getText().toString();
                 JSON_SendPhoneToAuthentication json_sendPhoneToAuthentication=new JSON_SendPhoneToAuthentication(con,IMEI,phoneNumber);
             }
         });
-
-
-
 
 
 

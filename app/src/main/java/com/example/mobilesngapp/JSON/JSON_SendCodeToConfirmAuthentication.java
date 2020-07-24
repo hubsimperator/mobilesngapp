@@ -1,11 +1,14 @@
 package com.example.mobilesngapp.JSON;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.mobilesngapp.Activity.MainMenu;
 import com.example.mobilesngapp.WindowLayoutInflater.DeviceAuthentication;
 import com.example.mobilesngapp.WindowLayoutInflater.DeviceAuthenticationCodeConfirm;
+import com.example.mobilesngapp.WindowLayoutInflater.DeviceAuthenticationStatus;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -70,10 +73,15 @@ public class JSON_SendCodeToConfirmAuthentication {
             Log.d("aa","a");
             if(result.contains("true")){
 
+                DeviceAuthenticationCodeConfirm deviceAuthenticationCodeConfirm=new DeviceAuthenticationCodeConfirm();
+                deviceAuthenticationCodeConfirm.CloseWindow();
+
+                DeviceAuthenticationStatus deviceAuthenticationStatus=new DeviceAuthenticationStatus();
+                deviceAuthenticationStatus.ShowDeviceAuthenticationStatus(con,true);
+
             }
         }
     }
-
 
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
