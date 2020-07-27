@@ -2,12 +2,10 @@ package com.example.mobilesngapp.JSON;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import com.example.mobilesngapp.Activity.MainMenu;
 import com.example.mobilesngapp.Class.UserLogin;
 import com.example.mobilesngapp.WindowLayoutInflater.DeviceAuthentication;
 
@@ -82,8 +80,9 @@ public class JSON_Login {
         result.Status = 1;
         if(result.Status==1){
             progressDialog.hide();
-            Intent intent = new Intent(con,  MainMenu.class);
-            con.startActivity(intent);
+         //   Intent intent = new Intent(con,  MainMenu.class);
+            JSON_GetJobList json_getJobList=new JSON_GetJobList(con,"tdziura");
+        //    con.startActivity(intent);
         }else if(result.Status==2){
             progressDialog.hide();
 

@@ -17,8 +17,8 @@ Przetestować działanie bazy danych i funkcji takich jak update, insert
 ---------
 Ustawić w momencie kiedy JSON pobiera dane z bazy servera to uruchamia metodę insert (zmiana daty w aplikacji, zobaczenie poprzednich dni pracy)
 ---------
-Stworzyć JSON który po zakonczeniu dnia pracy będzie pobierał dane z lokalnej bazy danych do bazy online i ją aktualizował / lub ustawić aktualizację bazy servera co każde użycie
-updateData
+Stworzyć JSON który po zakonczeniu dnia pracy będzie pobierał dane z lokalnej bazy danych do bazy online i ją aktualizował / lub ustawić aktualizację bazy
+servera co każde użycie updateData
 ---------
 Ustalić na podstawie danych z lokalnej bazy danych które prace jaki mają status i odpowiednio zaprezentować te dane
  */
@@ -118,10 +118,10 @@ public class SQLiteManager {
         public static final String STATUS = "Status";
         public static final String STATUS_ID = "StatusId";
         public static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+" ("+ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                ""+WORK_PLAN_ID+"STRING, " +
-                ""+WORK_START+" STRING, "+DURATION+" STRING, "+WORK_NAME+" STRING, "+NBR+" STRING, "+DESIG+" STRING, " +
-                ""+JOB_START+" STRING, "+JOB_END+" STRING, "+JOB_MIN_START+" STRING, "+JOB_MAX_START+" STRING, " +
-                ""+SNG_USER+" STRING, "+DZIAL+" STRING, "+STATUS+" STRING, "+STATUS_ID+" INTEGER)";
+                ""+WORK_PLAN_ID+" TEXT NOT NULL, " +
+                ""+WORK_START+" TEXT NOT NULL, "+DURATION+" TEXT NOT NULL, "+WORK_NAME+" TEXT NOT NULL, "+NBR+" TEXT NOT NULL, "+DESIG+" TEXT NOT NULL, " +
+                ""+JOB_START+" TEXT NOT NULL, "+JOB_END+" TEXT NOT NULL, "+JOB_MIN_START+" TEXT, "+JOB_MAX_START+" TEXT NOT NULL, " +
+                ""+SNG_USER+" TEXT NOT NULL, "+DZIAL+" TEXT NOT NULL, "+STATUS+" TEXT NOT NULL, "+STATUS_ID+" INTEGER NOT NULL)";
         private static final String DROP_TABLE ="DROP TABLE IF EXISTS "+TABLE_NAME;
         private Context context;
         public static final int version = 1;
