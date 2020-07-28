@@ -15,7 +15,7 @@
                 android:layout_height="match_parent"
                 android:background="#2196F3"
                 android:gravity="center"
-                android:text="DUPA"
+                android:text="Plan Dnia"
                 android:textSize="40dp"></TextView>
         </LinearLayout>
 
@@ -25,22 +25,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20sp"
         android:layout_marginLeft="20sp"
-        android:layout_marginTop="50sp"
+        android:layout_marginTop="55sp"
         android:ems="10"
         android:hint="Data" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="120dp"
                 android:orientation="horizontal">
                 <ListView
                     android:id="@+id/planDayListView"
@@ -51,27 +46,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true">
                 </ListView>
-                <ListView
-                    android:id="@+id/currentWorksListView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true" >
-                </ListView>
-                <ListView
-                    android:id="@+id/endWorksListView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true" >
-                </ListView>
             </LinearLayout>
-        </HorizontalScrollView>
-
     </RelativeLayout>
 
 </RelativeLayout>

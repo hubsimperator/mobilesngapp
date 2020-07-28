@@ -1,5 +1,6 @@
 package com.example.mobilesngapp.Activity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +14,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.mobilesngapp.Class.DataBaseAdapter;
 import com.example.mobilesngapp.Class.Job;
-import com.example.mobilesngapp.JSON.JSON_GetJobList;
+import com.example.mobilesngapp.Other.JobListFilter;
 import com.example.mobilesngapp.R;
 
 import java.text.DateFormat;
@@ -26,33 +25,21 @@ import java.util.Calendar;
 
 import static com.example.mobilesngapp.Activity.Login.backButtonCount;
 
-public class MainMenu extends AppCompatActivity {
+public class CompletedWork extends Activity {
     DatePickerDialog picker;
     EditText date;
     public static ArrayList<Job> jobList;
-    public ArrayList<Job> customDateJobList;
     private GestureDetector gestureDetector;
-    static String newDate = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_completedwork);
 
-        //wyciągnięcie danych z jsona
-        try{
-            Bundle extras = getIntent().getExtras();
-            jobList  = extras.getParcelableArrayList("JobList");
-        }catch (Exception e){
-            Log.d("D", "Empty JobList.");
-        }
+        jobList = new ArrayList<>();
 
-
-        //GestureDetector
+        //gesturedetector
         gestureDetector = new GestureDetector(this, new SwipeGestureDetector());
-
-        //ukrycie górnej belki
-        getSupportActionBar().hide();
 
         // Kalendarz
         date =(EditText) findViewById(R.id.dateText);
@@ -64,16 +51,16 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Calendar calendar = Calendar.getInstance();
-                final int day = calendar.get(Calendar.DAY_OF_MONTH);
-                final int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
-                picker = new DatePickerDialog(MainMenu.this,
+                picker = new DatePickerDialog(CompletedWork.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 String newDay = String.valueOf(dayOfMonth);
                                 if (dayOfMonth <= 9){
-                                   newDay = "0" + dayOfMonth;
+                                    newDay = "0" + dayOfMonth;
                                 }else{
                                     date.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
                                 }
@@ -82,28 +69,18 @@ public class MainMenu extends AppCompatActivity {
                                 }else{
                                     date.setText(newDay + "." + (monthOfYear + 1) + "." + year);
                                 }
-                                newDate = year+ "-"+(monthOfYear+1)+"-"+dayOfMonth;
-                                JSON_GetJobList json_getJobList=new JSON_GetJobList(MainMenu.this,"tdziura", newDate);
-                                finish();
+
+
                             }
                         }, year, month, day);
-           //
-                //Bundle bundle = getIntent().getExtras();
-                //customDateJobList = bundle.getParcelableArrayList("JobList");
                 picker.show();
             }
         });
+        JobListFilter jobListFilter = new JobListFilter(jobList);
 
-
-           // JobListFilter jobListFilter = new JobListFilter(jobList);
-            //jobListListView(jobListFilter.filterByStatus(0));
-
-
-        // Wyświetlenie danych z bazy danych
-       //jobListListView(jobListFilter.filterByStatus(0));
-
+        jobListListView(jobListFilter.filterByStatus(2));
     }
-    //Swipe Menu
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -113,29 +90,19 @@ public class MainMenu extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
-    private void onLeft( ){
-        Log.d("DEBUG_TAG", "onLeft");
-        Intent intent = new Intent(MainMenu.this, CurrentWorks.class);
+    private void onRight(){
+        Log.d("DEBUG_TAG", "onRight");
+        Intent intent = new Intent(CompletedWork.this, CurrentWorks.class);
         startActivity(intent);
         finish();
     }
 
-    //ListView w Menu
-    private void jobListListView(){
-        DataBaseAdapter adapter = new DataBaseAdapter(this, jobList);
-        ListView listView = (ListView) findViewById(R.id.planDayListView);
-        listView.setAdapter(adapter);
-
-
-    }
-    private void jobListListView(ArrayList<Job> jobArrayList){
+    private void jobListListView(ArrayList<Job> jobArrayList) {
         DataBaseAdapter adapter = new DataBaseAdapter(this, jobArrayList);
-        ListView listView = (ListView) findViewById(R.id.planDayListView);
+        ListView listView = (ListView) findViewById(R.id.completedWorksListView);
         listView.setAdapter(adapter);
-
-
     }
-    // GestureDetector
+
     private class SwipeGestureDetector extends GestureDetector.SimpleOnGestureListener{
         private static final int SWIPE_MIN_DISTANCE = 120;
         private static final int SWIPE_MAX_OFF_PATH = 200;
@@ -151,9 +118,9 @@ public class MainMenu extends AppCompatActivity {
 
                 if (diffAbs > SWIPE_MAX_OFF_PATH)
                     return false;
-                //Przesunięcie palcem w lewo
-                else if (diff > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY){
-                    MainMenu.this.onLeft();
+                //Przesunece palcem w prawo
+                if (-diff > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY){
+                    CompletedWork.this.onRight();
                 }
             }catch (Exception e){
                 Log.e("CurrentWorks Activity", "Error gesture detector. :c");

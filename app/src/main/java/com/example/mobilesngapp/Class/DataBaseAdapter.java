@@ -26,7 +26,7 @@ public class DataBaseAdapter extends ArrayAdapter<Job> {
         if (convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(item_workplan, parent, false);
         }
-        TextView workNameText = (TextView) convertView.findViewById(R.id.workNameText);
+        TextView workNameText = (TextView) convertView.findViewById(R.id.dataBaseTextView);
         // pokolorowanie danych dla odpowiednich statusów
 
         if (job.StatusId == 501){

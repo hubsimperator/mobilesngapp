@@ -34,7 +34,6 @@ public class JobListFilter {
 
         ArrayList<Job> filtredList = new ArrayList<>();
 
-        boolean b;
         for(int i = 0; i<listOfJobs.size(); i++){
 
             if (listOfJobs.get(i).StatusId.intValue()==status.intValue()){
