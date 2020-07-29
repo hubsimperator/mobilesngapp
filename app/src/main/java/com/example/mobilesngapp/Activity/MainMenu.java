@@ -11,28 +11,26 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mobilesngapp.Class.DataBaseAdapter;
 import com.example.mobilesngapp.Class.Job;
 import com.example.mobilesngapp.JSON.JSON_GetJobList;
+import com.example.mobilesngapp.Other.JobListFilter;
 import com.example.mobilesngapp.R;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import static com.example.mobilesngapp.Activity.Login.backButtonCount;
-
 public class MainMenu extends AppCompatActivity {
     DatePickerDialog picker;
     EditText date;
     public static ArrayList<Job> jobList;
-    public ArrayList<Job> customDateJobList;
     private GestureDetector gestureDetector;
-    static String newDate = null;
+    static String calendarDateForJSON = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +80,12 @@ public class MainMenu extends AppCompatActivity {
                                 }else{
                                     date.setText(newDay + "." + (monthOfYear + 1) + "." + year);
                                 }
-                                newDate = year+ "-"+(monthOfYear+1)+"-"+dayOfMonth;
-                                JSON_GetJobList json_getJobList=new JSON_GetJobList(MainMenu.this,"tdziura", newDate);
-                                finish();
+                                calendarDateForJSON = year+ "-"+(monthOfYear+1)+"-"+dayOfMonth;
+                                JSON_GetJobList json_getJobList=new JSON_GetJobList(MainMenu.this,"tdziura", calendarDateForJSON);
+                                //finish();
                             }
                         }, year, month, day);
+
            //
                 //Bundle bundle = getIntent().getExtras();
                 //customDateJobList = bundle.getParcelableArrayList("JobList");
@@ -94,15 +93,21 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-
-           // JobListFilter jobListFilter = new JobListFilter(jobList);
-            //jobListListView(jobListFilter.filterByStatus(0));
+           //
 
 
-        // Wyświetlenie danych z bazy danych
-       //jobListListView(jobListFilter.filterByStatus(0));
+        // WYŚWIETLENIE PRZEFILTROWANYCH DANYCH NA LISTVIEW ZA POMOCA METODY SHOWJOBLISTVIEW
+        JobListFilter jobListFilter = new JobListFilter(jobList);
+        showJobListView(jobListFilter.filterByStatus(0));
+
+        //WYJŚCIE Z APLIKACJI POPRZEZ PODWÓJNE KLIKNĘCIE NA PRZYCISK BACK
+        /*BackButton backButton = new BackButton();
+        backButton.onBackPressed();*/
 
     }
+
+
+
     //Swipe Menu
 
     @Override
@@ -120,21 +125,13 @@ public class MainMenu extends AppCompatActivity {
         finish();
     }
 
-    //ListView w Menu
-    private void jobListListView(){
-        DataBaseAdapter adapter = new DataBaseAdapter(this, jobList);
+    //METODA USTAWIAJACA ADAPTER DO LISTVIEW
+    public void showJobListView(ArrayList<Job> _jobList){
+        DataBaseAdapter adapter = new DataBaseAdapter(MainMenu.this, _jobList);
         ListView listView = (ListView) findViewById(R.id.planDayListView);
         listView.setAdapter(adapter);
-
-
     }
-    private void jobListListView(ArrayList<Job> jobArrayList){
-        DataBaseAdapter adapter = new DataBaseAdapter(this, jobArrayList);
-        ListView listView = (ListView) findViewById(R.id.planDayListView);
-        listView.setAdapter(adapter);
 
-
-    }
     // GestureDetector
     private class SwipeGestureDetector extends GestureDetector.SimpleOnGestureListener{
         private static final int SWIPE_MIN_DISTANCE = 120;
@@ -160,22 +157,6 @@ public class MainMenu extends AppCompatActivity {
             }
 
             return false;
-        }
-    }
-    //onBackPressed - system wyłaczania aplikacji po podwójnym wciśnięciu przyciusku
-    @Override
-    public void onBackPressed() {
-        if(backButtonCount >= 1)
-        {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else
-        {
-            Toast.makeText(this, "Wciśniej jeszcze raz, aby zakończyć działanie aplikacji.", Toast.LENGTH_LONG).show();
-            backButtonCount++;
         }
     }
 }

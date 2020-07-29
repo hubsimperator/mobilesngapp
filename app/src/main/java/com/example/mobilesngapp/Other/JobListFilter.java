@@ -1,10 +1,12 @@
 package com.example.mobilesngapp.Other;
 
+import android.app.Activity;
+
 import com.example.mobilesngapp.Class.Job;
 
 import java.util.ArrayList;
 
-public class JobListFilter {
+public class JobListFilter extends Activity {
     public ArrayList<Job> listOfJobs;
 
     public JobListFilter(ArrayList<Job> listOfJobs) {
@@ -43,4 +45,5 @@ public class JobListFilter {
         }
         return filtredList;
     }
+
 }

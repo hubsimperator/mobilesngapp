@@ -34,7 +34,7 @@ public class DataBaseAdapter extends ArrayAdapter<Job> {
         }else if(job.StatusId == 550){
             workNameText.setBackgroundColor(Color.YELLOW);
         }else if (job.StatusId == 520){
-            workNameText.setBackgroundColor(Color.GRAY);
+            workNameText.setBackgroundColor(Color.RED);
         }
         workNameText.setText(job.Desig + " \n " + job.NBR);
         return convertView;

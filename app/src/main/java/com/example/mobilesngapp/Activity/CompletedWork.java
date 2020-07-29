@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.mobilesngapp.Class.DataBaseAdapter;
 import com.example.mobilesngapp.Class.Job;
@@ -22,8 +21,6 @@ import com.example.mobilesngapp.R;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import static com.example.mobilesngapp.Activity.Login.backButtonCount;
 
 public class CompletedWork extends Activity {
     DatePickerDialog picker;
@@ -127,22 +124,6 @@ public class CompletedWork extends Activity {
             }
 
             return false;
-        }
-    }
-    //onBackPressed - system wyłaczania aplikacji po podwójnym wciśnięciu przyciusku
-    @Override
-    public void onBackPressed() {
-        if(backButtonCount >= 1)
-        {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else
-        {
-            Toast.makeText(this, "Wciśniej jeszcze raz, aby zakończyć działanie aplikacji.", Toast.LENGTH_LONG).show();
-            backButtonCount++;
         }
     }
 }
