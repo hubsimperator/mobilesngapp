@@ -34,8 +34,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.PlannedWorksForDay" android:configChanges="screenSize|orientation|screenLayout|navigation"></activity>
-        <activity android:name=".Activity.CurrentWorks"></activity>
-        <activity android:name=".Activity.CompletedWork"></activity>
     </application>
 
 </manifest>

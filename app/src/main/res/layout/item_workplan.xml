@@ -7,8 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:text="6:00:00"
+                android:text="6:00"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
                 <TextView
                     android:id="@+id/endTimeWorkTextView"
@@ -34,7 +34,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="6:00:00"
+                    android:text="6:00"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
             </LinearLayout>
             <TextView
@@ -53,11 +53,10 @@
                 android:id="@+id/squadTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="BRYGADY"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
+                android:text="BRYGADY"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

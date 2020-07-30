@@ -1,5 +1,6 @@
 package com.example.mobilesngapp.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -35,12 +36,13 @@ public class PlannedWorksForDay extends AppCompatActivity {
     static Context context;
     static ListView listView;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         context = PlannedWorksForDay.this;
-         listView = (ListView) findViewById(R.id.planDayListView);
+        listView = (ListView) findViewById(R.id.planDayListView);
 
 
         try{
@@ -49,14 +51,15 @@ public class PlannedWorksForDay extends AppCompatActivity {
         }catch (Exception e){
             Log.d("D", "Empty JobList.");
         }
-try{
-    Context m=context;
-    JobListFilter jobListFilter = new JobListFilter(jobList);
-    showJobListView(jobListFilter.filterByStatus(0));
 
-}catch (Exception e){
+        try{
+            Context m=context;
+            JobListFilter jobListFilter = new JobListFilter(jobList);
+            showJobListView(jobListFilter.filterByStatus(0));
 
-}
+        }catch (Exception e){
+
+        }
         //WYŚWIETLENIE LISTVIEW
 
         //KALENDARZ
@@ -99,9 +102,28 @@ try{
         });
 
         //SWIPOWANIE ACTIVITY
-        SwipeMenu swipeMenu = new SwipeMenu(context);
-        swipeMenu.gestureDetector();
+        //SwipeMenu swipeMenu = new SwipeMenu(this);
 
+        listView.setOnTouchListener(new SwipeMenu(this) {
+            /*public void onSwipeTop() {
+                Toast.makeText(getApplicationContext(), "Swiped top", Toast.LENGTH_SHORT).show();
+            }*/
+
+            public void onSwipeRight() {
+                Toast.makeText(getApplicationContext(), "Swiped right", Toast.LENGTH_SHORT).show();
+            }
+
+            public void onSwipeLeft() {
+                Toast.makeText(getApplicationContext(), "Swiped left", Toast.LENGTH_SHORT).show();
+                JobListFilter currentJobListFiltered = new JobListFilter(jobList);
+                showJobListView(currentJobListFiltered.filterByStatus(1));
+
+            }
+
+           /* public void onSwipeBottom() {
+                Toast.makeText(getApplicationContext(), "Swiped bottom", Toast.LENGTH_SHORT).show();
+            }*/
+        });
 
 
     }
@@ -124,7 +146,7 @@ try{
     }
     //USTAIENIE ADAPTERA DO LISTVIEW
     public void showJobListView(ArrayList<Job> _jobList) {
-        DataBaseAdapter adapter = new DataBaseAdapter(context, _jobList);
+        DataBaseAdapter adapter = new DataBaseAdapter(context,_jobList);
         listView.setAdapter(adapter);
     }
 }

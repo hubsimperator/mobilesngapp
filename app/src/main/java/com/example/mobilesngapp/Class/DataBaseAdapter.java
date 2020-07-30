@@ -18,9 +18,10 @@ import java.util.Date;
 import static com.example.mobilesngapp.R.layout.item_workplan;
 
 public class DataBaseAdapter extends ArrayAdapter<Job> {
-    public DataBaseAdapter(Context context, ArrayList<Job> jobList) {
-        super(context, 0, jobList);
-    }
+
+        public DataBaseAdapter(Context context, ArrayList<Job> jobList) {
+            super(context, 0, jobList);
+        }
 
     public View getView(int position, View convertView, ViewGroup parent){
 
@@ -42,7 +43,7 @@ public class DataBaseAdapter extends ArrayAdapter<Job> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String timeStartJob = new SimpleDateFormat("HH:mm:ss").format(startJobDate);
+        String timeStartJob = new SimpleDateFormat("HH:mm").format(startJobDate);
 
         Date endJobDate = null;
         try {
@@ -50,7 +51,7 @@ public class DataBaseAdapter extends ArrayAdapter<Job> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String timeEndJob = new SimpleDateFormat("HH:mm:ss").format(endJobDate);
+        String timeEndJob = new SimpleDateFormat("HH:mm").format(endJobDate);
 
         // pokolorowanie danych dla odpowiednich statusów
 
