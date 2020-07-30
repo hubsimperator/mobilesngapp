@@ -53,12 +53,22 @@ public class Permission {
             return false;
         }
 
+        if (ActivityCompat.checkSelfPermission(con,
+                Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }
+
+        if (ActivityCompat.checkSelfPermission(con,
+                Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+            return false;
+        }
+
         return true;
     }
 
     public void setPermissions(Activity activity) {
         ActivityCompat.requestPermissions((Activity) activity, new String[]{
-                Manifest.permission.INTERNET , Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.VIBRATE ,Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.SET_ALARM,Manifest.permission.READ_PHONE_STATE}, 1);
+                Manifest.permission.INTERNET , Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.VIBRATE ,Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.SET_ALARM,Manifest.permission.READ_PHONE_STATE,Manifest.permission.RECEIVE_SMS,Manifest.permission.READ_SMS}, 1);
     }
 
 }

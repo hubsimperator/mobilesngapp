@@ -34,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mobilesngapp.JSON.JSON_Login;
 import com.example.mobilesngapp.Other.InfoAboutPhone;
 import com.example.mobilesngapp.Other.Permission;
+import com.example.mobilesngapp.Other.SmsReader;
 import com.example.mobilesngapp.Other.getNetworkType;
 import com.example.mobilesngapp.R;
 
@@ -170,7 +171,10 @@ public class Login extends AppCompatActivity {
                     error.setText("Login i Hasło nie mogą być puste");
                     pg.hide();
                 } else {
-                    JSON_Login json_login=new JSON_Login(Login.this,Logi,Haslo,IMEI,telephoneNumber,error,pg);
+            //        JSON_Login json_login=new JSON_Login(Login.this,Logi,Haslo,IMEI,telephoneNumber,error,pg);
+                    SmsReader smsReader=new SmsReader();
+                    smsReader.ReadSms(Login.this);
+
                 }
             }
         });
