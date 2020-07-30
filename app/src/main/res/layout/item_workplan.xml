@@ -4,13 +4,60 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     >
-    <TextView
-        android:id="@+id/dataBaseTextView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/textView2"
-        android:text="PLAN DNIA / AKTUALNE PRACE / ZAKONCZONE PRACE"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="35dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="4">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:weightSum="2"
+                android:orientation="vertical">
+            <TextView
+                android:id="@+id/startTimeWorkTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="6:00:00"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+                <TextView
+                    android:id="@+id/endTimeWorkTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="6:00:00"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/dataBaseTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="PLAN DNIA / AKTUALNE PRACE / ZAKONCZONE PRACE"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/squadTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:text="BRYGADY"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
