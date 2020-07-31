@@ -19,9 +19,9 @@ import static com.example.mobilesngapp.R.layout.item_workplan;
 
 public class DataBaseAdapter extends ArrayAdapter<Job> {
 
-        public DataBaseAdapter(Context context, ArrayList<Job> jobList) {
-            super(context, 0, jobList);
-        }
+    public DataBaseAdapter(Context context, ArrayList<Job> jobList) {
+        super(context, 0, jobList);
+    }
 
     public View getView(int position, View convertView, ViewGroup parent){
 

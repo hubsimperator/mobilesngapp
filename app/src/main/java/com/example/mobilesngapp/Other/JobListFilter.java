@@ -34,18 +34,18 @@ public class JobListFilter extends Activity {
 
         }
 
-        ArrayList<Job> filtredList = new ArrayList<>();
+        ArrayList<Job> filteredList = new ArrayList<>();
         if(listOfJobs != null){
             for(int i = 0; i<listOfJobs.size(); i++){
 
                 if (listOfJobs.get(i).StatusId.intValue()==status.intValue()){
-                    filtredList.add(listOfJobs.get(i));
+                    filteredList.add(listOfJobs.get(i));
                 }else{
                 }
             }
         }
 
-        return filtredList;
+        return filteredList;
     }
 
 }

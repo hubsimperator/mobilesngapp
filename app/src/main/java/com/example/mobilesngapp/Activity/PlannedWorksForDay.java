@@ -41,6 +41,7 @@ public class PlannedWorksForDay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        getSupportActionBar().hide();
         context = PlannedWorksForDay.this;
         listView = (ListView) findViewById(R.id.planDayListView);
 
@@ -51,16 +52,6 @@ public class PlannedWorksForDay extends AppCompatActivity {
         }catch (Exception e){
             Log.d("D", "Empty JobList.");
         }
-
-        try{
-            Context m=context;
-            JobListFilter jobListFilter = new JobListFilter(jobList);
-            showJobListView(jobListFilter.filterByStatus(0));
-
-        }catch (Exception e){
-
-        }
-        //WYŚWIETLENIE LISTVIEW
 
         //KALENDARZ
         date = (EditText) findViewById(R.id.dateText);
@@ -105,24 +96,17 @@ public class PlannedWorksForDay extends AppCompatActivity {
         //SwipeMenu swipeMenu = new SwipeMenu(this);
 
         listView.setOnTouchListener(new SwipeMenu(this) {
-            /*public void onSwipeTop() {
-                Toast.makeText(getApplicationContext(), "Swiped top", Toast.LENGTH_SHORT).show();
-            }*/
 
             public void onSwipeRight() {
                 Toast.makeText(getApplicationContext(), "Swiped right", Toast.LENGTH_SHORT).show();
             }
 
             public void onSwipeLeft() {
-                Toast.makeText(getApplicationContext(), "Swiped left", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Swiped left", Toast.LENGTH_SHORT).show();
                 JobListFilter currentJobListFiltered = new JobListFilter(jobList);
-                showJobListView(currentJobListFiltered.filterByStatus(1));
+                showJobListView(currentJobListFiltered.filterByStatus(2));
 
             }
-
-           /* public void onSwipeBottom() {
-                Toast.makeText(getApplicationContext(), "Swiped bottom", Toast.LENGTH_SHORT).show();
-            }*/
         });
 
 
@@ -146,7 +130,8 @@ public class PlannedWorksForDay extends AppCompatActivity {
     }
     //USTAIENIE ADAPTERA DO LISTVIEW
     public void showJobListView(ArrayList<Job> _jobList) {
-        DataBaseAdapter adapter = new DataBaseAdapter(context,_jobList);
+        JobListFilter jobListFilter = new JobListFilter(_jobList);
+        DataBaseAdapter adapter = new DataBaseAdapter(context,jobListFilter.filterByStatus(0));
         listView.setAdapter(adapter);
     }
 }
