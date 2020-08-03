@@ -6,27 +6,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#2196F3"
             android:gravity="center"
             android:text="Plan Dnia"
-            android:textSize="40dp"></TextView>
+            android:textSize="40dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/dateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/data" />
+        </LinearLayout>
+
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/dateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20sp"
-        android:layout_marginLeft="20sp"
-        android:layout_marginTop="55sp"
-        android:ems="10"
-        android:hint="Data" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"

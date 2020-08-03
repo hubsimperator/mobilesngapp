@@ -1,4 +1,4 @@
-package com.example.mobilesngapp.Class;
+package com.example.mobilesngapp.Other;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.mobilesngapp.Class.Job;
 import com.example.mobilesngapp.R;
 
 import java.text.ParseException;
@@ -17,14 +18,13 @@ import java.util.Date;
 
 import static com.example.mobilesngapp.R.layout.item_workplan;
 
-public class DataBaseAdapter extends ArrayAdapter<Job> {
+public class ArrayListAdapter extends ArrayAdapter<Job> {
 
-    public DataBaseAdapter(Context context, ArrayList<Job> jobList) {
+    public ArrayListAdapter(Context context, ArrayList<Job> jobList){
         super(context, 0, jobList);
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
-
         Job job = getItem(position);
 
         if (convertView == null){
@@ -34,7 +34,6 @@ public class DataBaseAdapter extends ArrayAdapter<Job> {
         TextView startTimeWorkTextView = (TextView) convertView.findViewById(R.id.startTimeWorkTextView);
         TextView endTimeWorkTextView = (TextView) convertView.findViewById(R.id.endTimeWorkTextView);
         TextView squadTextView = (TextView) convertView.findViewById(R.id.squadTextView);
-        //String delimiter = "\\s+";
         String startJob = job.JobMinStart;
         String endJob = job.JobEnd;
         Date startJobDate = null;
@@ -57,9 +56,6 @@ public class DataBaseAdapter extends ArrayAdapter<Job> {
 
         if (job.StatusId == 501){
             workNameText.setBackgroundColor(Color.GREEN);
-            /*startTimeWorkTextView.setBackgroundColor(Color.GREEN);
-            endTimeWorkTextView.setBackgroundColor(Color.GREEN);
-            squadTextView.setBackgroundColor(Color.GREEN);*/
         }else if(job.StatusId == 550){
             workNameText.setBackgroundColor(Color.YELLOW);
         }else if (job.StatusId == 520){
@@ -71,5 +67,4 @@ public class DataBaseAdapter extends ArrayAdapter<Job> {
         squadTextView.setText(job.NBR);
         return convertView;
     }
-
 }
