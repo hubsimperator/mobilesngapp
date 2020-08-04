@@ -3,7 +3,7 @@ package com.example.mobilesngapp.JSON;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.example.mobilesngapp.Activity.PlannedWorksForDay;
+import com.example.mobilesngapp.Activity.MainActivity;
 import com.example.mobilesngapp.Class.Job;
 
 import org.apache.http.HttpResponse;
@@ -92,20 +92,9 @@ public class JSON_GetJobList {
 
     @Override
     protected void onPostExecute(ArrayList<Job> result) {
-/*
-        Intent intent = new Intent(con, MainMenu.class);
-        Bundle bundle = new Bundle();
-*/
-
-       /* bundle.putParcelableArrayList("JobList", result);
-        intent.putExtras(bundle);
-        con.startActivity(intent);*/
-
-        PlannedWorksForDay plannedWorksForDay = new PlannedWorksForDay();
-        plannedWorksForDay.showJobListView(result);
-
-
-    }
+        MainActivity mainActivity = new MainActivity();
+        mainActivity.getDataFromJson(result);
+        }
     }
 
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {

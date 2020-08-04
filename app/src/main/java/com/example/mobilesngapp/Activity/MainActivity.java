@@ -2,12 +2,12 @@ package com.example.mobilesngapp.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +15,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.mobilesngapp.Class.Job;
 import com.example.mobilesngapp.JSON.JSON_GetJobList;
-import com.example.mobilesngapp.Other.ArrayListAdapter;
-import com.example.mobilesngapp.Other.JobListFilter;
+import com.example.mobilesngapp.Other.ViewPagerAdapter;
 import com.example.mobilesngapp.R;
 
 import java.text.DateFormat;
@@ -26,7 +25,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ViewPager2 viewPager2;
-    ListView jobListView;
 
     TextView planDay;
     TextView currentWorks;
@@ -35,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     DatePickerDialog datePicker;
 
-    Context context = this;
+    static Context context;
 
-    public static ArrayList<Job> jobList;
+    public static ArrayList<Job> jobs;
     static String setNewCalendarDateForJSONtoGetNewContentForListView = null;
     List<String> numberOfPages;
 
@@ -45,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = MainActivity.this;
 
+
+        calendar = findViewById(R.id.calendarEditText);
         viewPager2 = findViewById(R.id.viewPager2);
         planDay = findViewById(R.id.planDayTextView);
         currentWorks = findViewById(R.id.currentWorksTextView);
@@ -58,12 +59,17 @@ public class MainActivity extends AppCompatActivity {
         numberOfPages.add("Third Screen");
 //--------------------------------------------------------------------------//
 
-/*
-Ustawienie adaptera do viewPager2.
 
+        /*try {
+            Bundle extras = getIntent().getExtras();
+            jobList = extras.getParcelableArrayList("JobList");
+        }catch (Exception e){
+            Log.d("Pobranie JobList", "Pusta Lista.");
+        }*/
 
- */
-        viewPager2.setAdapter();
+        /** wywołanie adaptera viewPager */
+
+        viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs));
 
 //---------------------CALENDAR---------------------//
         calendar.setInputType(InputType.TYPE_NULL);
@@ -104,15 +110,35 @@ Ustawienie adaptera do viewPager2.
                 datePicker.show();
             }
         });
-//--------------------------------------------------//
+//---------------------Pogrubienie Menu nawigacyjnego-----------------------------//
 
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if (position == 0){
+                    planDay.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                    currentWorks.setTypeface(Typeface.DEFAULT);
+                    completedWorks.setTypeface(Typeface.DEFAULT);
+                }else if(position == 1){
+                    currentWorks.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                    planDay.setTypeface(Typeface.DEFAULT);
+                    completedWorks.setTypeface(Typeface.DEFAULT);
+                }else if (position == 2){
+                    completedWorks.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                    currentWorks.setTypeface(Typeface.DEFAULT);
+                    planDay.setTypeface(Typeface.DEFAULT);
+                }
+            }
+        });
+//---------------------------------------------------------------------------------//
     }
 
 //---------------------Po za onCreate---------------------//
-    public void showJobListView(ArrayList<Job> _jobList){
-        JobListFilter jobListFilter = new JobListFilter(_jobList);
-        ArrayListAdapter adapter = new ArrayListAdapter(context, jobListFilter.filterByStatus(0));
-        jobListView.setAdapter(adapter);
+    /** przypisanie result do zmiennej */
+    public ArrayList<Job> getDataFromJson(ArrayList<Job> result){
+        jobs = result;
+        return jobs;
     }
 
 }

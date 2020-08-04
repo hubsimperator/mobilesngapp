@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.example.mobilesngapp.R.layout.item_workplan;
+import static com.example.mobilesngapp.R.layout.item_listview;
 
 public class DataBaseAdapter extends ArrayAdapter<Job> {
 
@@ -28,7 +28,7 @@ public class DataBaseAdapter extends ArrayAdapter<Job> {
         Job job = getItem(position);
 
         if (convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(item_workplan, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(item_listview, parent, false);
         }
         TextView workNameText = (TextView) convertView.findViewById(R.id.descriptionOfWorkTextView);
         TextView startTimeWorkTextView = (TextView) convertView.findViewById(R.id.startTimeWorkTextView);

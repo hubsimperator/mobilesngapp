@@ -83,7 +83,7 @@ public class JSON_Login {
         if(result.Status==1){
             progressDialog.hide();
             Intent intent = new Intent(con,  MainActivity.class);
-           JSON_GetJobList json_getJobList=new JSON_GetJobList(con,"tdziura");
+            JSON_GetJobList json_getJobList=new JSON_GetJobList(con,"tdziura");
             con.startActivity(intent);
         }else if(result.Status==2){
             progressDialog.hide();
