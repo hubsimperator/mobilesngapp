@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import com.example.mobilesngapp.Activity.MainActivity;
+import com.example.mobilesngapp.Activity.SplashActivity;
 import com.example.mobilesngapp.Class.UserLogin;
 import com.example.mobilesngapp.WindowLayoutInflater.DeviceAuthentication;
 
@@ -82,7 +82,7 @@ public class JSON_Login {
         result.Status = 1;
         if(result.Status==1){
             progressDialog.hide();
-            Intent intent = new Intent(con,  MainActivity.class);
+            Intent intent = new Intent(con,  SplashActivity.class);
             JSON_GetJobList json_getJobList=new JSON_GetJobList(con,"tdziura");
             con.startActivity(intent);
         }else if(result.Status==2){

@@ -24,7 +24,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    ViewPager2 viewPager2;
+    static ViewPager2 viewPager2;
 
     TextView planDay;
     TextView currentWorks;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Job> jobs;
     static String setNewCalendarDateForJSONtoGetNewContentForListView = null;
-    List<String> numberOfPages;
+    static List<String> numberOfPages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +138,11 @@ public class MainActivity extends AppCompatActivity {
     /** przypisanie result do zmiennej */
     public ArrayList<Job> getDataFromJson(ArrayList<Job> result){
         jobs = result;
-        return jobs;
+        if (numberOfPages == null || viewPager2 == null){
+            return jobs;
+        }else{
+            viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs));
+        }
+        return null;
     }
-
 }

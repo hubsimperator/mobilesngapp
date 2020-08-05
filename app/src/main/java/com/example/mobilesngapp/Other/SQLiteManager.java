@@ -1,4 +1,4 @@
-package com.example.mobilesngapp.Class;
+package com.example.mobilesngapp.Other;
 
 import android.content.ContentValues;
 import android.content.Context;
