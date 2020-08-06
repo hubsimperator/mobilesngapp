@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = MainActivity.this;
 
+        getSupportActionBar().hide();
 
         calendar = findViewById(R.id.calendarEditText);
         viewPager2 = findViewById(R.id.viewPager2);
@@ -59,17 +60,9 @@ public class MainActivity extends AppCompatActivity {
         numberOfPages.add("Third Screen");
 //--------------------------------------------------------------------------//
 
+        /* Wywołanie adaptera viewPager tylko raz w momencie uruchomienia onCreate */
 
-        /*try {
-            Bundle extras = getIntent().getExtras();
-            jobList = extras.getParcelableArrayList("JobList");
-        }catch (Exception e){
-            Log.d("Pobranie JobList", "Pusta Lista.");
-        }*/
-
-        /** wywołanie adaptera viewPager */
-
-        viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs));
+        viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs, -1));
 
 //---------------------CALENDAR---------------------//
         calendar.setInputType(InputType.TYPE_NULL);
@@ -103,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
                             calendar.setText(editedDay + "." + (monthOfYear + 1) + "." + year);
                         }
                         //json
+                        /** Uruchomienie Jsona z nową wybraną datą przez użytkownika */
                         setNewCalendarDateForJSONtoGetNewContentForListView = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                        JSON_GetJobList json_getJobList = new JSON_GetJobList(context,  "tdziura", setNewCalendarDateForJSONtoGetNewContentForListView);
+                        JSON_GetJobList json_getJobList = new JSON_GetJobList(context,  "a_test", setNewCalendarDateForJSONtoGetNewContentForListView);
                     }
                 },year,month,day);
                 datePicker.show();
@@ -132,16 +126,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 //---------------------------------------------------------------------------------//
+
+        //Możliwość zmiany kart poprzez wciśnięcie texty "PLAN DNIA" / "AKTUALNE PRACE" / "ZAKOŃCZONE PRACE"
+        planDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewPager2.setCurrentItem(0);
+            }
+        });
+        currentWorks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewPager2.setCurrentItem(1);
+            }
+        });
+        completedWorks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewPager2.setCurrentItem(2);
+            }
+        });
     }
 
-//---------------------Po za onCreate---------------------//
-    /** przypisanie result do zmiennej */
+     //Po za onCreate
+    /** Metoda ta przy pierwsyzm wykonaniu i utworzeniu onCreate MainActivity ma numberOfPages i viewPager równe NULL.
+     * Zwraca wtedy jobs = (ArrayList<Job> jobs)
+     * Następnie uruchamiany jest kod z onCreate "viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs));"
+     * W tym momencie następuje przetworzenie danych i wyświetlenie ich na ekran z obecną datą.
+     * Z racji tego że pola numberOfPages, context, viewPager2 są statyczne w momencie zmiany daty pamięta wartość tych pul i wchodzi do elsa.
+     * jobs jest nadpisywane a adapter jest wykonany z nowymi danymi pobranymi z JSON_GetJobList.
+     * */
     public ArrayList<Job> getDataFromJson(ArrayList<Job> result){
         jobs = result;
         if (numberOfPages == null || viewPager2 == null){
             return jobs;
         }else{
-            viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs));
+            viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs, -1));
         }
         return null;
     }

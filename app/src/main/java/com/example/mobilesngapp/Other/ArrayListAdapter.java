@@ -33,9 +33,9 @@ public class ArrayListAdapter extends ArrayAdapter<Job> {
         TextView workNameText = (TextView) convertView.findViewById(R.id.descriptionOfWorkTextView);
         TextView startTimeWorkTextView = (TextView) convertView.findViewById(R.id.startTimeWorkTextView);
         TextView endTimeWorkTextView = (TextView) convertView.findViewById(R.id.endTimeWorkTextView);
-        TextView squadTextView = (TextView) convertView.findViewById(R.id.squadTextView);
-        String startJob = job.JobMinStart;
-        String endJob = job.JobEnd;
+        final TextView squadTextView = (TextView) convertView.findViewById(R.id.squadTextView);
+        String startJob = job.WorkStart;
+        String endJob = job.WorkEnd;
         Date startJobDate = null;
         try {
             startJobDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startJob);
@@ -54,17 +54,19 @@ public class ArrayListAdapter extends ArrayAdapter<Job> {
 
         // pokolorowanie danych dla odpowiednich statusów
 
-        if (job.StatusId == 501){
+        if (job.Status.equals("PLA")){
             workNameText.setBackgroundColor(Color.GREEN);
-        }else if(job.StatusId == 550){
+        }else if(job.Status.equals("RUN")){
             workNameText.setBackgroundColor(Color.YELLOW);
-        }else if (job.StatusId == 520){
-            workNameText.setBackgroundColor(Color.RED);
+        }else if (job.Status.equals("DON")){
+            workNameText.setBackgroundColor(Color.GRAY);
         }
         startTimeWorkTextView.setText(timeStartJob);
         endTimeWorkTextView.setText(timeEndJob);
-        workNameText.setText(job.Desig);
-        squadTextView.setText(job.NBR);
+        workNameText.setText(job.WorkReqName);
+        squadTextView.setText(job.ResourceName);
         return convertView;
+
     }
+
 }

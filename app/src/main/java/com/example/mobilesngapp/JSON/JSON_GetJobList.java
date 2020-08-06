@@ -33,7 +33,7 @@ public class JSON_GetJobList {
         this.con = con;
         User = user;
         this.sDate = "";
-        new JSON_GetJobList.HttpAsyncTask2().execute("https://notif2.sng.com.pl/api/Mobile2AppGetJobList");
+        new JSON_GetJobList.HttpAsyncTask2().execute("https://notif2.sng.com.pl/api/Mobile2AppGetWorkList");
 
     }
 
@@ -41,7 +41,7 @@ public class JSON_GetJobList {
         this.con = con;
         User = user;
         this.sDate = sDate;
-        new JSON_GetJobList.HttpAsyncTask2().execute("https://notif2.sng.com.pl/api/Mobile2AppGetJobList");
+        new JSON_GetJobList.HttpAsyncTask2().execute("https://notif2.sng.com.pl/api/Mobile2AppGetWorkList");
 
     }
 
@@ -79,7 +79,7 @@ public class JSON_GetJobList {
                 array = new JSONArray(post);
                 for(int i =0; i<array.length();i++){
                     JSONObject row = array.getJSONObject(i);
-                    Job job=new Job(row.getInt("WorkPlanId"),row.getString("WorkStart"),row.getString("Duration"),row.getString("WorkName"),row.getString("NBR"),row.getString("Desig"),row.getString("JobStart"),row.getString("JobEnd"),row.getString("JobMinStart"),row.getString("JobMaxStart"),row.getString("SNGUser"),row.getString("Dzial"),row.getString("Status"),row.getInt("StatusId"));
+                    Job job=new Job(row.getString("WorkPlanId"), row.getString("WorkReqCode"), row.getString("WorkReqName"), row.getString("Location"),row.getString("workkind"), row.getString("Status"), row.getString("Progress"), row.getString("ObjectName"), row.getString("WorkDescription"), row.getString("ApproachDuration"), row.getString("WorkDuration"), row.getString("ResourceEiTID"), row.getString("WorkPlanTimeRangeID"), row.getString("pWorkPlan"), row.getString("WorkStart"), row.getString("WorkEnd"), row.getString("Real"), row.getString("ProblemReason"), row.getString("WorkReqId"), row.getString("ProblemReasonName"), row.getString("ResourceName"), row.getString("C"), row.getString("D"));
                     JobList.add(job);
             }
 

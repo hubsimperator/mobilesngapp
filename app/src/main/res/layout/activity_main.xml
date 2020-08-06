@@ -15,13 +15,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:textSize="25dp"
             android:layout_weight="1"
-            android:text="Plan Dnia"/>
+            android:text="Plan Dnia" />
         <TextView
             android:id="@+id/currentWorksTextView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:textSize="25dp"
             android:layout_weight="1"
             android:text="Aktualne Prace"/>
         <TextView
@@ -29,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:textSize="25dp"
             android:layout_weight="1"
             android:text="Zakończone Prace"/>
     </LinearLayout>
@@ -43,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="dd/mm/rrrr"
+            android:textSize="25dp"
             android:layout_weight="1"/>
     </LinearLayout>
 

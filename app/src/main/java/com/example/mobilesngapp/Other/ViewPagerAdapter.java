@@ -23,13 +23,15 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     private ViewPager2 viewPager2;
     private ArrayList<Job> jobList;
     Context c;
+    private static int Position;
 
-    public ViewPagerAdapter(Context context, List<String> numberOfScreens, ViewPager2 viewPager2, ArrayList<Job> jobList){
+    public ViewPagerAdapter(Context context, List<String> numberOfScreens, ViewPager2 viewPager2, ArrayList<Job> jobList, int position){
         this.mInflater = LayoutInflater.from(context);
         this.mNumberOfScreens = numberOfScreens;
         this.viewPager2 = viewPager2;
         this.c = context;
         this.jobList = jobList;
+        Position = position;
     }
 
     @Override
@@ -40,7 +42,6 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
     }
 
     @Override
@@ -58,11 +59,18 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
             relativeLayout = itemView.findViewById(R.id.container);
             jobListView = itemView.findViewById(R.id.jobListView);
 
-            showJobListView(jobList);
+            /*Stworzona zmienna "Position" do filtracji danych z bazy. Maxymalny rozmiar Position to: 2
+            * getItemCount() zwraca: 3 <- zależne od ilości stron w viewPager czyli od listy w MainActivity.
+            * za każdym wywolaniem getItemCount() odejmujemy od tego -2, a position jest powiększane o 1.
+            * Jeżeli dodamy więcej kart należy odjąć od getItemCount liczbę ekranów winikającej z numberOfPages -1.
+            * */
+            Position += getItemCount() - 2;
+            showJobListView(jobList, Position);
 
         }
-        public void showJobListView(ArrayList<Job> jobList){
-            ArrayListAdapter adapter = new ArrayListAdapter(c, jobList);
+        public void showJobListView(ArrayList<Job> jobList, int position){
+            JobListFilter filter = new JobListFilter(jobList);
+            ArrayListAdapter adapter = new ArrayListAdapter(c, filter.filterByStatus(position));
             jobListView.setAdapter(adapter);
         }
     }

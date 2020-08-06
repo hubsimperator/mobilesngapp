@@ -4,61 +4,81 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Job implements Parcelable {
-    public Integer WorkPlanId;
-    public String WorkStart;
-    public String Duration;
-    public String WorkName;
-    public String NBR;
-    public String Desig;
-    public String JobStart;
-    public String JobEnd;
-    public String JobMinStart;
-    public String JobMaxStart;
-    public String SNGUser;
-    public String Dzial;
+    public String WorkPlanId;
+    public String WorkReqCode;
+    public String WorkReqName;
+    public String Location;
+    public String WorkKind;
     public String Status;
-    public Integer StatusId;
+    public String Progress;
+    public String ObjectName;
+    public String WorkDescription;
+    public String ApproachDuration;
+    public String WorkDuration;
+    public String ResourceEiTID;
+    public String WorkPlanTimeRangeID;
+    public String pWorkPlan;
+    public String WorkStart;
+    public String WorkEnd;
+    public String Real;
+    public String ProblemReason;
+    public String WorkReqId;
+    public String ProblemReasonName;
+    public String ResourceName;
+    public String C;
+    public String D;
 
-    public Job(Integer workPlanId, String workStart, String duration, String workName, String NBR, String desig, String jobStart, String jobEnd, String jobMinStart, String jobMaxStart, String SNGUser, String dzial, String status, Integer statusId) {
+    public Job(String workPlanId, String workReqCode, String workReqName, String location, String workKind, String status, String progress, String objectName, String workDescription, String approachDuration, String workDuration, String resourceEiTID, String workPlanTimeRangeID, String pWorkPlan, String workStart, String workEnd, String real, String problemReason, String workReqId, String problemReasonName, String resourceName, String c, String d) {
         WorkPlanId = workPlanId;
-        WorkStart = workStart;
-        Duration = duration;
-        WorkName = workName;
-        this.NBR = NBR;
-        Desig = desig;
-        JobStart = jobStart;
-        JobEnd = jobEnd;
-        JobMinStart = jobMinStart;
-        JobMaxStart = jobMaxStart;
-        this.SNGUser = SNGUser;
-        Dzial = dzial;
+        WorkReqCode = workReqCode;
+        WorkReqName = workReqName;
+        Location = location;
+        WorkKind = workKind;
         Status = status;
-        StatusId = statusId;
+        Progress = progress;
+        ObjectName = objectName;
+        WorkDescription = workDescription;
+        ApproachDuration = approachDuration;
+        WorkDuration = workDuration;
+        ResourceEiTID = resourceEiTID;
+        WorkPlanTimeRangeID = workPlanTimeRangeID;
+        this.pWorkPlan = pWorkPlan;
+        WorkStart = workStart;
+        WorkEnd = workEnd;
+        Real = real;
+        ProblemReason = problemReason;
+        WorkReqId = workReqId;
+        ProblemReasonName = problemReasonName;
+        ResourceName = resourceName;
+        C = c;
+        D = d;
     }
 
+
     protected Job(Parcel in) {
-        if (in.readByte() == 0) {
-            WorkPlanId = null;
-        } else {
-            WorkPlanId = in.readInt();
-        }
-        WorkStart = in.readString();
-        Duration = in.readString();
-        WorkName = in.readString();
-        NBR = in.readString();
-        Desig = in.readString();
-        JobStart = in.readString();
-        JobEnd = in.readString();
-        JobMinStart = in.readString();
-        JobMaxStart = in.readString();
-        SNGUser = in.readString();
-        Dzial = in.readString();
+        WorkPlanId = in.readString();
+        WorkReqCode = in.readString();
+        WorkReqName = in.readString();
+        Location = in.readString();
+        WorkKind = in.readString();
         Status = in.readString();
-        if (in.readByte() == 0) {
-            StatusId = null;
-        } else {
-            StatusId = in.readInt();
-        }
+        Progress = in.readString();
+        ObjectName = in.readString();
+        WorkDescription = in.readString();
+        ApproachDuration = in.readString();
+        WorkDuration = in.readString();
+        ResourceEiTID = in.readString();
+        WorkPlanTimeRangeID = in.readString();
+        this.pWorkPlan = in.readString();
+        WorkStart = in.readString();
+        WorkEnd = in.readString();
+        Real = in.readString();
+        ProblemReason = in.readString();
+        WorkReqId = in.readString();
+        ProblemReasonName = in.readString();
+        ResourceName = in.readString();
+        C = in.readString();
+        D = in.readString();
     }
 
     public static final Creator<Job> CREATOR = new Creator<Job>() {
@@ -73,100 +93,44 @@ public class Job implements Parcelable {
         }
     };
 
-    public Integer getWorkPlanId() {
+    public String getWorkPlanId() {
         return WorkPlanId;
     }
 
-    public void setWorkPlanId(Integer workPlanId) {
+    public void setWorkPlanId(String workPlanId) {
         WorkPlanId = workPlanId;
     }
 
-    public String getWorkStart() {
-        return WorkStart;
+    public String getWorkReqCode() {
+        return WorkReqCode;
     }
 
-    public void setWorkStart(String workStart) {
-        WorkStart = workStart;
+    public void setWorkReqCode(String workReqCode) {
+        WorkReqCode = workReqCode;
     }
 
-    public String getDuration() {
-        return Duration;
+    public String getWorkReqName() {
+        return WorkReqName;
     }
 
-    public void setDuration(String duration) {
-        Duration = duration;
+    public void setWorkReqName(String workReqName) {
+        WorkReqName = workReqName;
     }
 
-    public String getWorkName() {
-        return WorkName;
+    public String getLocation() {
+        return Location;
     }
 
-    public void setWorkName(String workName) {
-        WorkName = workName;
+    public void setLocation(String location) {
+        Location = location;
     }
 
-    public String getNBR() {
-        return NBR;
+    public String getWorkKind() {
+        return WorkKind;
     }
 
-    public void setNBR(String NBR) {
-        this.NBR = NBR;
-    }
-
-    public String getDesig() {
-        return Desig;
-    }
-
-    public void setDesig(String desig) {
-        Desig = desig;
-    }
-
-    public String getJobStart() {
-        return JobStart;
-    }
-
-    public void setJobStart(String jobStart) {
-        JobStart = jobStart;
-    }
-
-    public String getJobEnd() {
-        return JobEnd;
-    }
-
-    public void setJobEnd(String jobEnd) {
-        JobEnd = jobEnd;
-    }
-
-    public String getJobMinStart() {
-        return JobMinStart;
-    }
-
-    public void setJobMinStart(String jobMinStart) {
-        JobMinStart = jobMinStart;
-    }
-
-    public String getJobMaxStart() {
-        return JobMaxStart;
-    }
-
-    public void setJobMaxStart(String jobMaxStart) {
-        JobMaxStart = jobMaxStart;
-    }
-
-    public String getSNGUser() {
-        return SNGUser;
-    }
-
-    public void setSNGUser(String SNGUser) {
-        this.SNGUser = SNGUser;
-    }
-
-    public String getDzial() {
-        return Dzial;
-    }
-
-    public void setDzial(String dzial) {
-        Dzial = dzial;
+    public void setWorkKind(String workKind) {
+        WorkKind = workKind;
     }
 
     public String getStatus() {
@@ -177,12 +141,140 @@ public class Job implements Parcelable {
         Status = status;
     }
 
-    public Integer getStatusId() {
-        return StatusId;
+    public String getProgress() {
+        return Progress;
     }
 
-    public void setStatusId(Integer statusId) {
-        StatusId = statusId;
+    public void setProgress(String progress) {
+        Progress = progress;
+    }
+
+    public String getObjectName() {
+        return ObjectName;
+    }
+
+    public void setObjectName(String objectName) {
+        ObjectName = objectName;
+    }
+
+    public String getWorkDescription() {
+        return WorkDescription;
+    }
+
+    public void setWorkDescription(String workDescription) {
+        WorkDescription = workDescription;
+    }
+
+    public String getApproachDuration() {
+        return ApproachDuration;
+    }
+
+    public void setApproachDuration(String approachDuration) {
+        ApproachDuration = approachDuration;
+    }
+
+    public String getWorkDuration() {
+        return WorkDuration;
+    }
+
+    public void setWorkDuration(String workDuration) {
+        WorkDuration = workDuration;
+    }
+
+    public String getResourceEiTID() {
+        return ResourceEiTID;
+    }
+
+    public void setResourceEiTID(String resourceEiTID) {
+        ResourceEiTID = resourceEiTID;
+    }
+
+    public String getWorkPlanTimeRangeID() {
+        return WorkPlanTimeRangeID;
+    }
+
+    public void setWorkPlanTimeRangeID(String workPlanTimeRangeID) {
+        WorkPlanTimeRangeID = workPlanTimeRangeID;
+    }
+
+    public String getpWorkPlan() {
+        return pWorkPlan;
+    }
+
+    public void setpWorkPlan(String pWorkPlan) {
+        this.pWorkPlan = pWorkPlan;
+    }
+
+    public String getWorkStart() {
+        return WorkStart;
+    }
+
+    public void setWorkStart(String workStart) {
+        WorkStart = workStart;
+    }
+
+    public String getWorkEnd() {
+        return WorkEnd;
+    }
+
+    public void setWorkEnd(String workEnd) {
+        WorkEnd = workEnd;
+    }
+
+    public String getReal() {
+        return Real;
+    }
+
+    public void setReal(String real) {
+        Real = real;
+    }
+
+    public String getProblemReason() {
+        return ProblemReason;
+    }
+
+    public void setProblemReason(String problemReason) {
+        ProblemReason = problemReason;
+    }
+
+    public String getWorkReqId() {
+        return WorkReqId;
+    }
+
+    public void setWorkReqId(String workReqId) {
+        WorkReqId = workReqId;
+    }
+
+    public String getProblemReasonName() {
+        return ProblemReasonName;
+    }
+
+    public void setProblemReasonName(String problemReasonName) {
+        ProblemReasonName = problemReasonName;
+    }
+
+    public String getResourceName() {
+        return ResourceName;
+    }
+
+    public void setResourceName(String resourceName) {
+        ResourceName = resourceName;
+    }
+
+    public String getC() {
+        return C;
+    }
+
+    public void setC(String c) {
+        C = c;
+    }
+
+    public String getD() {
+        return D;
+    }
+
+    public void setD(String d) {
+        D = d;
     }
 
     @Override
@@ -192,29 +284,28 @@ public class Job implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        if (WorkPlanId == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(WorkPlanId);
-        }
-        parcel.writeString(WorkStart);
-        parcel.writeString(Duration);
-        parcel.writeString(WorkName);
-        parcel.writeString(NBR);
-        parcel.writeString(Desig);
-        parcel.writeString(JobStart);
-        parcel.writeString(JobEnd);
-        parcel.writeString(JobMinStart);
-        parcel.writeString(JobMaxStart);
-        parcel.writeString(SNGUser);
-        parcel.writeString(Dzial);
+        parcel.writeString(WorkPlanId);
+        parcel.writeString(WorkReqCode);
+        parcel.writeString(WorkReqName);
+        parcel.writeString(Location);
+        parcel.writeString(WorkKind);
         parcel.writeString(Status);
-        if (StatusId == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(StatusId);
-        }
+        parcel.writeString(Progress);
+        parcel.writeString(ObjectName);
+        parcel.writeString(WorkDescription);
+        parcel.writeString(ApproachDuration);
+        parcel.writeString(WorkDuration);
+        parcel.writeString(ResourceEiTID);
+        parcel.writeString(WorkPlanTimeRangeID);
+        parcel.writeString(this.pWorkPlan);
+        parcel.writeString(WorkStart);
+        parcel.writeString(WorkEnd);
+        parcel.writeString(Real);
+        parcel.writeString(ProblemReason);
+        parcel.writeString(WorkReqId);
+        parcel.writeString(ProblemReasonName);
+        parcel.writeString(ResourceName);
+        parcel.writeString(C);
+        parcel.writeString(D);
     }
 }

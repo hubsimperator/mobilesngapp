@@ -13,34 +13,40 @@ public class JobListFilter extends Activity {
         this.listOfJobs = listOfJobs;
     }
 
-    public ArrayList<Job> filterByStatus(Integer status){
-        // Status 0 - Nowe prace nierozpoczęte
-        // Status 1 - Prace aktualne rozpoczęte
-        // Status 2 - Prace skończone
+    public ArrayList<Job> filterByStatus(Integer page){
+        /*Page 0 - Wszystkie prace
+        * Page 1 - Prace rozpoczęte
+        * Page 2 - Prace zakończone
+        * Każdy page to strona w ViewPager, jeżeli zmienimy ilosć stron, i chcemy na nowych stronach dodać filtrację danych to należy
+        * dodać kolejnego case.* */
 
-        switch(status){
+        String result = "";
+
+        switch(page){
             case 0:
                 // Plan Dnia
-                status = 501;
                 break;
             case 1:
                 // Prace Aktualne
-                status = 550;
+                result = "RUN";
                 break;
             case 2:
                 // Prace zakończone
-                status = 520;
+                result = "DON";
                 break;
-
+            default:
+                break;
         }
 
         ArrayList<Job> filteredList = new ArrayList<>();
         if(listOfJobs != null){
             for(int i = 0; i<listOfJobs.size(); i++){
-
-                if (listOfJobs.get(i).StatusId.intValue()==status.intValue()){
+                if (result.equals("")){
+                    filteredList.add(listOfJobs.get(i));
+                }else if (listOfJobs.get(i).Status.equals(result)){
                     filteredList.add(listOfJobs.get(i));
                 }else{
+
                 }
             }
         }
