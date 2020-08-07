@@ -85,6 +85,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
         Permission permission=new Permission();
         if (!permission.checkPermissions(Login.this)) {
             permission.setPermissions((Activity) this);

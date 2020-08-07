@@ -17,7 +17,7 @@
             android:gravity="center"
             android:textSize="25dp"
             android:layout_weight="1"
-            android:text="Plan Dnia" />
+            android:text="Plan Dzienny" />
         <TextView
             android:id="@+id/currentWorksTextView"
             android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
             android:gravity="center"
             android:textSize="25dp"
             android:layout_weight="1"
-            android:text="Aktualne Prace"/>
+            android:text="Trwające Plany"/>
         <TextView
             android:id="@+id/completedWorksTextView"
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:gravity="center"
             android:textSize="25dp"
             android:layout_weight="1"
-            android:text="Zakończone Prace"/>
+            android:text="Zakończone Plany"/>
     </LinearLayout>
 
     <LinearLayout
