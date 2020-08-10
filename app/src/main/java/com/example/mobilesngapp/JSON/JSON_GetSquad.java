@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.mobilesngapp.Class.Brigade;
+import com.example.mobilesngapp.Other.SquadAlertDialog;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -28,12 +29,19 @@ public class JSON_GetSquad {
 
     ArrayList<Brigade> squadList=new ArrayList<>();
 
-    public JSON_GetSquad(Context con, String brigade) {
+    /*public JSON_GetSquad(Context con, String brigade) {
         this.con = con;
         ResourceName = brigade;
         this.sDate = "";
         new JSON_GetSquad.HttpAsyncTask2().execute("https://notif2.sng.com.pl/api/Mobile2AppGetSkladBrygady");
 
+    }*/
+
+    public JSON_GetSquad(Context con, String brigade, String date) {
+        this.con = con;
+        ResourceName = brigade;
+        this.sDate = date;
+        new JSON_GetSquad.HttpAsyncTask2().execute("https://notif2.sng.com.pl/api/Mobile2AppGetSkladBrygady");
     }
 
 
@@ -84,7 +92,9 @@ public class JSON_GetSquad {
 
         @Override
         protected void onPostExecute(ArrayList<Brigade> result) {
-
+            SquadAlertDialog squadAlertDialog = new SquadAlertDialog();
+            squadAlertDialog.squadResult(result);
+            squadAlertDialog.onCreate();
         }
     }
 

@@ -15,6 +15,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.mobilesngapp.Class.Job;
 import com.example.mobilesngapp.JSON.JSON_GetJobList;
+import com.example.mobilesngapp.Other.SquadAlertDialog;
 import com.example.mobilesngapp.Other.ViewPagerAdapter;
 import com.example.mobilesngapp.R;
 
@@ -96,9 +97,12 @@ public class MainActivity extends AppCompatActivity {
                             calendar.setText(editedDay + "." + (monthOfYear + 1) + "." + year);
                         }
                         //json
-                        /** Uruchomienie Jsona z nową wybraną datą przez użytkownika */
+                        SquadAlertDialog squadAlertDialog = new SquadAlertDialog();
+                        /** Uruchomienie Jsona z nową wybraną datą przez użytkownika
+                         *  Wprowadzenie wybranej daty do AlertDialog*/
                         setNewCalendarDateForJSONtoGetNewContentForListView = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                        JSON_GetJobList json_getJobList = new JSON_GetJobList(context,  "a_test", setNewCalendarDateForJSONtoGetNewContentForListView);
+                        squadAlertDialog.getDateFromCalendar(setNewCalendarDateForJSONtoGetNewContentForListView);
+                        JSON_GetJobList json_getJobList = new JSON_GetJobList(context,  "rwardal", setNewCalendarDateForJSONtoGetNewContentForListView);
                     }
                 },year,month,day);
                 datePicker.show();
