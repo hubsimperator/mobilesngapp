@@ -54,18 +54,15 @@ public class MainActivity extends AppCompatActivity {
         currentWorks = findViewById(R.id.currentWorksTextView);
         completedWorks = findViewById(R.id.completedWorksTextView);
 
-//---------------------Number of Pages for viewAdapter2---------------------//
         numberOfPages = new ArrayList<>();
         numberOfPages.add("First Screen");
         numberOfPages.add("Second Screen");
         numberOfPages.add("Third Screen");
-//--------------------------------------------------------------------------//
 
         /* Wywołanie adaptera viewPager tylko raz w momencie uruchomienia onCreate */
 
         viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs, -1));
 
-//---------------------CALENDAR---------------------//
         calendar.setInputType(InputType.TYPE_NULL);
 
         Calendar c = Calendar.getInstance();
@@ -108,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 datePicker.show();
             }
         });
-//---------------------Pogrubienie Menu nawigacyjnego-----------------------------//
 
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -129,9 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-//---------------------------------------------------------------------------------//
 
-        //Możliwość zmiany kart poprzez wciśnięcie texty "PLAN DNIA" / "AKTUALNE PRACE" / "ZAKOŃCZONE PRACE"
+        //Możliwość zmiany kart poprzez wciśnięcie textu "PLAN DNIA" / "AKTUALNE PRACE" / "ZAKOŃCZONE PRACE"
         planDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,12 +147,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-     //Po za onCreate
+    //Po za onCreate
     /** Metoda ta przy pierwsyzm wykonaniu i utworzeniu onCreate MainActivity ma numberOfPages i viewPager równe NULL.
      * Zwraca wtedy jobs = (ArrayList<Job> jobs)
      * Następnie uruchamiany jest kod z onCreate "viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs));"
      * W tym momencie następuje przetworzenie danych i wyświetlenie ich na ekran z obecną datą.
-     * Z racji tego że pola numberOfPages, context, viewPager2 są statyczne w momencie zmiany daty pamięta wartość tych pul i wchodzi do elsa.
+     * Z racji tego że pola numberOfPages, context, viewPager2 są statyczne w momencie zmiany daty pamięta wartość tych pól i wchodzi do elsa.
      * jobs jest nadpisywane a adapter jest wykonany z nowymi danymi pobranymi z JSON_GetJobList.
      * */
     public ArrayList<Job> getDataFromJson(ArrayList<Job> result){

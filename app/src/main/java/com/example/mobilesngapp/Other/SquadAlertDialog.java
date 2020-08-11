@@ -73,7 +73,7 @@ public class SquadAlertDialog extends DialogFragment {
 
     public ArrayList<String> squadResult(ArrayList<Brigade> result){
         for (int i = 0; i < result.size(); i++){
-         squadList.add(result.get(i).getChildResourceName());
+            squadList.add(result.get(i).getChildResourceName());
         }
         return squadList;
     }

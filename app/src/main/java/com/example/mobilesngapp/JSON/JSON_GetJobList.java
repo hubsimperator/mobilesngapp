@@ -81,19 +81,19 @@ public class JSON_GetJobList {
                     JSONObject row = array.getJSONObject(i);
                     Job job=new Job(row.getString("WorkPlanId"), row.getString("WorkReqCode"), row.getString("WorkReqName"), row.getString("Location"),row.getString("workkind"), row.getString("Status"), row.getString("Progress"), row.getString("ObjectName"), row.getString("WorkDescription"), row.getString("ApproachDuration"), row.getString("WorkDuration"), row.getString("ResourceEiTID"), row.getString("WorkPlanTimeRangeID"), row.getString("pWorkPlan"), row.getString("WorkStart"), row.getString("WorkEnd"), row.getString("Real"), row.getString("ProblemReason"), row.getString("WorkReqId"), row.getString("ProblemReasonName"), row.getString("ResourceName"), row.getString("C"), row.getString("D"));
                     JobList.add(job);
-            }
+                }
 
             } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                e.printStackTrace();
+            }
             return JobList;//deserialize_json(post);
         }
 
 
-    @Override
-    protected void onPostExecute(ArrayList<Job> result) {
-        MainActivity mainActivity = new MainActivity();
-        mainActivity.getDataFromJson(result);
+        @Override
+        protected void onPostExecute(ArrayList<Job> result) {
+            MainActivity mainActivity = new MainActivity();
+            mainActivity.getDataFromJson(result);
         }
     }
 
