@@ -1,5 +1,6 @@
 package com.example.mobilesngapp.JSON;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -41,7 +42,7 @@ public class JSON_GetSquad {
         this.con = con;
         ResourceName = brigade;
         this.sDate = date;
-        new JSON_GetSquad.HttpAsyncTask2().execute("https://notif2.sng.com.pl/api/Mobile2AppGetSkladBrygady");
+        new JSON_GetSquad.HttpAsyncTask2(con).execute("https://notif2.sng.com.pl/api/Mobile2AppGetSkladBrygady");
     }
 
 
@@ -70,6 +71,18 @@ public class JSON_GetSquad {
     }
     private class HttpAsyncTask2 extends AsyncTask<String, Void, ArrayList<Brigade>> {
 
+        private ProgressDialog dialog;
+
+        public HttpAsyncTask2(Context activity){
+            dialog = new ProgressDialog(activity);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            dialog.setMessage("Pobieranie...");
+            dialog.show();
+        }
+
         @Override
         protected ArrayList<Brigade> doInBackground(String... urls) {
             String post= POST(urls[0]);
@@ -95,6 +108,9 @@ public class JSON_GetSquad {
             SquadAlertDialog squadAlertDialog = new SquadAlertDialog();
             squadAlertDialog.squadResult(result);
             squadAlertDialog.onCreate();
+            if (dialog.isShowing()){
+                dialog.dismiss();
+            }
         }
     }
 

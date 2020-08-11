@@ -2,6 +2,7 @@ package com.example.mobilesngapp.Other;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import static com.example.mobilesngapp.R.layout.item_listview;
 
 public class ArrayListAdapter extends ArrayAdapter<Job> {
 
+    private long LastClickTime = 0;
 
     public ArrayListAdapter(Context context, ArrayList<Job> jobList){
         super(context, 0, jobList);
@@ -70,7 +72,11 @@ public class ArrayListAdapter extends ArrayAdapter<Job> {
         squadTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // Zabezpieczneie przed double click na Brygady po to aby nie bugować dialogu.
+                if (SystemClock.elapsedRealtime() - LastClickTime < 1000){
+                    return;
+                }
+                LastClickTime = SystemClock.elapsedRealtime();
                 SquadAlertDialog squadAlertDialog = new SquadAlertDialog();
                 squadAlertDialog.getResourceName(job.ResourceName, getContext());
             }

@@ -4,4 +4,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="data">Data</string>
     <string name="ok">OK</string>
+    <string name="plan_dzienny">Plan Dzienny</string>
+    <string name="trwaj_ce_plany">Trwające Plany</string>
+    <string name="zako_czone_plany">Zakończone Plany</string>
+    <string name="dd_mm_rrrr">dd/mm/rrrr</string>
+    <string name="logo">Logo</string>
 </resources>

@@ -15,25 +15,25 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:layout_weight="1"
-            android:text="Plan Dzienny" />
+            android:text="@string/plan_dzienny" />
         <TextView
             android:id="@+id/currentWorksTextView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:layout_weight="1"
-            android:text="Trwające Plany"/>
+            android:text="@string/trwaj_ce_plany"/>
         <TextView
             android:id="@+id/completedWorksTextView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:layout_weight="1"
-            android:text="Zakończone Plany"/>
+            android:text="@string/zako_czone_plany"/>
     </LinearLayout>
 
     <LinearLayout
@@ -45,9 +45,11 @@
             android:id="@+id/calendarEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="dd/mm/rrrr"
-            android:textSize="25dp"
-            android:layout_weight="1"/>
+            android:hint="@string/dd_mm_rrrr"
+            android:textSize="25sp"
+            android:layout_weight="1"
+            tools:ignore="InefficientWeight,TextFields"
+            android:autofillHints="" />
     </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2
