@@ -36,6 +36,7 @@
         </activity>
         <activity android:name=".Activity.MainActivity" android:configChanges="screenSize|orientation|screenLayout|navigation"/>
         <activity android:name=".Activity.SplashActivity" android:configChanges="screenSize|orientation|screenLayout|navigation"/>
+        <activity android:name=".Activity.EditWorkPlanActivity" android:configChanges="screenSize|orientation|screenLayout|navigation"/>
     </application>
 
 </manifest>

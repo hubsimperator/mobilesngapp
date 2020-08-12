@@ -9,4 +9,16 @@
     <string name="zako_czone_plany">Zakończone Plany</string>
     <string name="dd_mm_rrrr">dd/mm/rrrr</string>
     <string name="logo">Logo</string>
+    <string name="nazwa_planu">Numer planu pracy</string>
+    <string name="opis">Opis</string>
+    <string name="obiekt">Obiekt</string>
+    <string name="lokacja">Lokalizacja</string>
+    <string name="workName" />
+    <string name="rodzaj">Rodzaj</string>
+    <string name="dateStart">Data rozpoczęcia</string>
+    <string name="workStart">Godzina rozpoczęcia</string>
+    <string name="workEnd">Godzina zakończenia</string>
+    <string name="dateEnd">Data zakończenia</string>
+    <string name="progress">Progres pracy</string>
+    <string name="result">50</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.mobilesngapp.Other;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.mobilesngapp.Activity.EditWorkPlanActivity;
 import com.example.mobilesngapp.Class.Job;
 import com.example.mobilesngapp.R;
 
@@ -79,6 +81,17 @@ public class ArrayListAdapter extends ArrayAdapter<Job> {
                 LastClickTime = SystemClock.elapsedRealtime();
                 SquadAlertDialog squadAlertDialog = new SquadAlertDialog();
                 squadAlertDialog.getResourceName(job.ResourceName, getContext());
+            }
+        });
+
+        //uruchomienie widoku edycji danych 
+
+        workNameText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+                Intent intent = new Intent(context, EditWorkPlanActivity.class);
+                context.startActivity(intent);
             }
         });
         return convertView;
