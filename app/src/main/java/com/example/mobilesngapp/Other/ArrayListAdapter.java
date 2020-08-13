@@ -1,5 +1,6 @@
 package com.example.mobilesngapp.Other;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,12 +25,15 @@ import static com.example.mobilesngapp.R.layout.item_listview;
 public class ArrayListAdapter extends ArrayAdapter<Job> {
 
     private long LastClickTime = 0;
+    ArrayList<Job> jobArrayList;
 
     public ArrayListAdapter(Context context, ArrayList<Job> jobList){
         super(context, 0, jobList);
+        jobArrayList = jobList;
     }
 
-    public View getView(int position, View convertView, final ViewGroup parent){
+    @SuppressLint("SimpleDateFormat")
+    public View getView(final int position, View convertView, final ViewGroup parent){
         final Job job = getItem(position);
 
         if (convertView == null){
@@ -44,6 +48,7 @@ public class ArrayListAdapter extends ArrayAdapter<Job> {
         Date startJobDate = null;
         try {
             startJobDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(startJob);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -84,11 +89,13 @@ public class ArrayListAdapter extends ArrayAdapter<Job> {
             }
         });
 
-        //uruchomienie widoku edycji danych 
+        //uruchomienie widoku edycji danych
 
         workNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                EditWorkPlanActivity editWorkPlanActivity = new EditWorkPlanActivity();
+                editWorkPlanActivity.getJobsData(jobArrayList, position);
                 Context context = getContext();
                 Intent intent = new Intent(context, EditWorkPlanActivity.class);
                 context.startActivity(intent);

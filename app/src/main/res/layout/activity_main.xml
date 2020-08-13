@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:layout_weight="1"
             android:text="@string/plan_dzienny" />
         <TextView
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:layout_weight="1"
             android:text="@string/trwaj_ce_plany"/>
         <TextView
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:layout_weight="1"
             android:text="@string/zako_czone_plany"/>
     </LinearLayout>

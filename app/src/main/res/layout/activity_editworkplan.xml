@@ -4,272 +4,326 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:weightSum="3">
-        <TextView
-            android:id="@+id/workReqCode"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="45sp"
-            android:text="@string/nazwa_planu"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="2">
-        <TextView
-            android:id="@+id/workName"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:text="Nazwa pracy"
-            android:textSize="20sp"
-            android:layout_weight="2"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/obiekt"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"/>
-        <TextView
-            android:id="@+id/objectName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginLeft="10sp"
-            android:textSize="20sp"
-            android:text="Objekt"
-            android:layout_weight="2"/>
-    </LinearLayout>
+            android:weightSum="1">
+            <TextView
+                android:id="@+id/workReqCode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:text="@string/nazwa_planu"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lokacja"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"/>
-        <TextView
-            android:id="@+id/location"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            android:text="Lokacja"
-            android:layout_weight="2"/>
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/workName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10sp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="Nazwa pracy"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/opis"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/descriptionOfWorkTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10sp"
+                        android:layout_weight="2"
+                        android:text="Opis"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/obiekt"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/objectName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10sp"
+                        android:layout_weight="2"
+                        android:text="Objekt"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/lokacja"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10sp"
+                        android:layout_weight="2"
+                        android:text="Lokacja"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/rodzaj"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/workKind"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10sp"
+                        android:layout_weight="2"
+                        android:text="Rodzaj pracy"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/dateStart"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/dateStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10sp"
+                        android:layout_weight="2"
+                        android:text="dd/mm/yyyy"
+                        android:textSize="22sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/workStart"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/workStartTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10sp"
+                        android:layout_weight="2"
+                        android:text="6:00"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/dateEnd"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/dateEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10sp"
+                        android:layout_weight="2"
+                        android:text="6:00"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/workEnd"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/workEndTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30sp"
+                        android:layout_weight="2"
+                        android:text="6:00"
+                        android:textSize="22sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/progress"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <SeekBar
+                        android:id="@+id/progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:max="100"
+                        android:progress="0" />
+
+                    <TextView
+                        android:id="@+id/progressText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/result"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/opis"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"/>
-        <TextView
-            android:id="@+id/descriptionOfWorkTextView"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:textSize="20sp"
-            android:text="Opis"
-            android:layout_weight="2"/>
-    </LinearLayout>
 
-    <LinearLayout
+    <!-- <ListView
+        android:id="@+id/workDetailsListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rodzaj"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"/>
-        <TextView
-            android:id="@+id/workKind"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10sp"
-            android:textSize="20sp"
-            android:text="Rodzaj pracy"
-            android:layout_weight="2"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dateStart"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"/>
-        <TextView
-            android:id="@+id/dateStart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10sp"
-            android:textSize="20sp"
-            android:text="dd/mm/yyyy"
-            android:layout_weight="2"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/workStart"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"/>
-        <TextView
-            android:id="@+id/workStartTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10sp"
-            android:textSize="20sp"
-            android:text="6:00"
-            android:layout_weight="2"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dateEnd"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"/>
-        <TextView
-            android:id="@+id/dateEnd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10sp"
-            android:textSize="20sp"
-            android:text="6:00"
-            android:layout_weight="2"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/workEnd"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"/>
-        <TextView
-            android:id="@+id/workEndTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="20sp"
-            android:layout_marginLeft="30sp"
-            android:text="6:00"
-            android:layout_weight="2"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20sp"
-        android:weightSum="4">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/progress"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"/>
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:max="100"
-            android:progress="0"
-            android:layout_weight="4"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/result"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_weight="2"/>
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_marginTop="@android:dimen/dialog_min_width_major"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"/>-->
 
 </LinearLayout>
