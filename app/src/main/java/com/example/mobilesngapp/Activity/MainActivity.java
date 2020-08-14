@@ -6,15 +6,19 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.mobilesngapp.Class.Job;
 import com.example.mobilesngapp.JSON.JSON_GetJobList;
+import com.example.mobilesngapp.Other.DatePickerFragment;
 import com.example.mobilesngapp.Other.SquadAlertDialog;
 import com.example.mobilesngapp.Other.ViewPagerAdapter;
 import com.example.mobilesngapp.R;
@@ -22,23 +26,25 @@ import com.example.mobilesngapp.R;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     static ViewPager2 viewPager2;
 
     TextView planDay;
     TextView currentWorks;
     TextView completedWorks;
-    EditText calendar;
-
-    DatePickerDialog datePicker;
+    TextView calendar;
+    Spinner brigadeSpinner;
 
     static Context context;
 
     public static ArrayList<Job> jobs;
     static String setNewCalendarDateForJSONtoGetNewContentForListView = null;
     static List<String> numberOfPages;
+    public static ArrayList<String> brigades = new ArrayList<String>();
+    public static HashSet<String> brigades2 = new HashSet<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        calendar = findViewById(R.id.calendarEditText);
+        calendar = findViewById(R.id.calendarTextView);
         viewPager2 = findViewById(R.id.viewPager2);
         planDay = findViewById(R.id.planDayTextView);
         currentWorks = findViewById(R.id.currentWorksTextView);
         completedWorks = findViewById(R.id.completedWorksTextView);
+        brigadeSpinner = findViewById(R.id.spinner);
 
         numberOfPages = new ArrayList<>();
         numberOfPages.add("First Screen");
@@ -63,46 +70,17 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs, -1));
 
+        //Kalendarz i jego wywołanie
         calendar.setInputType(InputType.TYPE_NULL);
-
         Calendar c = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.DEFAULT).format(c.getTime());
-
         calendar.setText(currentDate);
 
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar c = Calendar.getInstance();
-                int year = c.get(Calendar.YEAR);
-                final int month = c.get(Calendar.MONTH);
-                final int day = c.get(Calendar.DAY_OF_MONTH);
-
-                datePicker = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        String editedDay = String.valueOf(dayOfMonth);
-
-                        if (dayOfMonth <= 9){
-                            editedDay = "0" + dayOfMonth;
-                        }else{
-                            calendar.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
-                        }
-                        if (monthOfYear < 9){
-                            calendar.setText(editedDay + ".0" + (monthOfYear + 1) + "." + year);
-                        }else{
-                            calendar.setText(editedDay + "." + (monthOfYear + 1) + "." + year);
-                        }
-                        //json
-                        SquadAlertDialog squadAlertDialog = new SquadAlertDialog();
-                        /** Uruchomienie Jsona z nową wybraną datą przez użytkownika
-                         *  Wprowadzenie wybranej daty do AlertDialog*/
-                        setNewCalendarDateForJSONtoGetNewContentForListView = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                        squadAlertDialog.getDateFromCalendar(setNewCalendarDateForJSONtoGetNewContentForListView);
-                        JSON_GetJobList json_getJobList = new JSON_GetJobList(context,  "rwardal", setNewCalendarDateForJSONtoGetNewContentForListView);
-                    }
-                },year,month,day);
-                datePicker.show();
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "date picker");
             }
         });
 
@@ -123,6 +101,22 @@ public class MainActivity extends AppCompatActivity {
                     currentWorks.setTypeface(Typeface.DEFAULT);
                     planDay.setTypeface(Typeface.DEFAULT);
                 }
+            }
+        });
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, brigades);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        brigadeSpinner.setAdapter(adapter);
+        brigadeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -158,10 +152,45 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<Job> getDataFromJson(ArrayList<Job> result){
         jobs = result;
         if (numberOfPages == null || viewPager2 == null){
+            for (int i = 0; i < result.size(); i++){
+                brigades.add(result.get(i).ResourceName);
+            }
+            //usunięcie powtarzających się brygad
+            brigades2.addAll(brigades);
+            brigades.clear();
+            brigades.addAll(brigades2);
             return jobs;
         }else{
             viewPager2.setAdapter(new ViewPagerAdapter(context, numberOfPages, viewPager2,jobs, -1));
+            for (int i = 0; i < result.size(); i++){
+                brigades.add(result.get(i).ResourceName);
+            }
+            //usunięcie powtarzających się brygad
+            brigades2.addAll(brigades);
+            brigades.clear();
+            brigades.addAll(brigades2);
         }
         return null;
+    }
+
+    //metoda do wyboru daty, szybsza niż w wersji 1
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+        String editedDay = String.valueOf(dayOfMonth);
+
+        if (dayOfMonth <= 9){
+            editedDay = "0" + dayOfMonth;
+        }else{
+            calendar.setText(dayOfMonth + "." + (monthOfYear + 1) + "." + year);
+        }
+        if (monthOfYear < 9){
+            calendar.setText(editedDay + ".0" + (monthOfYear + 1) + "." + year);
+        }else{
+            calendar.setText(editedDay + "." + (monthOfYear + 1) + "." + year);
+        }
+        SquadAlertDialog squadAlertDialog = new SquadAlertDialog();
+        setNewCalendarDateForJSONtoGetNewContentForListView = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+        squadAlertDialog.getDateFromCalendar(setNewCalendarDateForJSONtoGetNewContentForListView);
+        JSON_GetJobList json_getJobList = new JSON_GetJobList(context,  "rwardal", setNewCalendarDateForJSONtoGetNewContentForListView);
     }
 }

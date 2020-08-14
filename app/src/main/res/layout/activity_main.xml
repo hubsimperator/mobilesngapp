@@ -37,19 +37,23 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1">
-        <EditText
-            android:id="@+id/calendarEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        android:weightSum="2">
+        <TextView
+            android:id="@+id/calendarTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:hint="@string/dd_mm_rrrr"
-            android:textSize="25sp"
-            android:layout_weight="1"
-            tools:ignore="InefficientWeight,TextFields"
-            android:autofillHints="" />
+            android:textSize="20sp"
+            android:layout_weight="1"/>
+        <Spinner
+            android:id = "@+id/spinner"
+            android:layout_width = "wrap_content"
+            android:layout_height = "match_parent"
+            android:prompt = "@string/brygady"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2

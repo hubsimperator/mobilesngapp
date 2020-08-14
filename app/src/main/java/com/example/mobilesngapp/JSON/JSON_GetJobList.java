@@ -1,5 +1,6 @@
 package com.example.mobilesngapp.JSON;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -33,7 +34,7 @@ public class JSON_GetJobList {
         this.con = con;
         User = user;
         this.sDate = "";
-        new JSON_GetJobList.HttpAsyncTask2().execute("https://notif2.sng.com.pl/api/Mobile2AppGetWorkList");
+        new JSON_GetJobList.HttpAsyncTask2(con).execute("https://notif2.sng.com.pl/api/Mobile2AppGetWorkList");
 
     }
 
@@ -41,7 +42,7 @@ public class JSON_GetJobList {
         this.con = con;
         User = user;
         this.sDate = sDate;
-        new JSON_GetJobList.HttpAsyncTask2().execute("https://notif2.sng.com.pl/api/Mobile2AppGetWorkList");
+        new JSON_GetJobList.HttpAsyncTask2(con).execute("https://notif2.sng.com.pl/api/Mobile2AppGetWorkList");
 
     }
 
@@ -70,6 +71,18 @@ public class JSON_GetJobList {
     }
     private class HttpAsyncTask2 extends AsyncTask<String, Void, ArrayList<Job>> {
 
+        private ProgressDialog dialog;
+
+        public HttpAsyncTask2(Context activity){
+            dialog = new ProgressDialog(activity);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            dialog.setMessage("Pobieranie...");
+            dialog.show();
+        }
+
         @Override
         protected ArrayList<Job> doInBackground(String... urls) {
             String post= POST(urls[0]);
@@ -94,6 +107,9 @@ public class JSON_GetJobList {
         protected void onPostExecute(ArrayList<Job> result) {
             MainActivity mainActivity = new MainActivity();
             mainActivity.getDataFromJson(result);
+            if (dialog.isShowing()){
+                dialog.dismiss();
+            }
         }
     }
 
